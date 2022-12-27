@@ -14,7 +14,7 @@ function Navbar() {
         </div>
         <div className="mr-8 ">
           <button className="mr-8"> Entrar </button>
-          <button className="px-3 py-4 bg-blue-500 text-white"> Cadastre-se</button>
+          <button className=" pt-3 pb-8 py-4  bg-blue-500 text-white  rounded h-10 w-32 "> Cadastre-se</button>
         </div>
 
       </div>
