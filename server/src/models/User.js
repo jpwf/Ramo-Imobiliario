@@ -1,23 +1,16 @@
-/*const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcryptjs')
-
-const UserSchema = new Schema(
-    nomeCompleto: String,
-
-
-)*/
-
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
-const User = mongoose.model('User', Schema);
+const ObjectId = Schema.ObjectId
 
 const UserSchema = new Schema({
-    nomeCompleto: String,
+    id: ObjectId,
     email: String,
     senha: String, 
+    nomeCompleto: String,
     telefone: Number, 
     cpf: String,
+})
 
-}
-)
+const UserModel = mongoose.model('users', UserSchema)
+module.exports = UserSchema
+
