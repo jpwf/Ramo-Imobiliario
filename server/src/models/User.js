@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema
-const ObjectId = Schema.ObjectId
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
     id: ObjectId,
@@ -9,11 +9,8 @@ const UserSchema = new Schema({
     nomeCompleto: String,
     telefone: Number, 
     cpf: String
-})
+});
 
-const UserModel = mongoose.model('users', UserSchema)
+const UserModel = mongoose.model('users', UserSchema);
 
-export default UserModel
-
-
-
+export default UserModel;
