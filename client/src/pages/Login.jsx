@@ -1,12 +1,12 @@
 import React from 'react';
-import LoginImage from '../../public/LoginImage.png'
+import LoginImage from '../assets/login-img.png'
 import Navbar from  '../components/navBar'
 function LoginPage(){
   return(
-    <div>
+    <>
       <Navbar/>
       <div className='flex flex-row justify-between'>
-        <img className='ml-56 mt-24 'src={LoginImage}/>
+        <img className='ml-56 mt-24 max-h-[493px] 'src={LoginImage}/>
         <form className='flex flex-col w-auto h-auto px-12 mt-24 pt-12 mb-48 border border-solid rounded-xl border-formLine mr-40'>
           <p className='text-2xl font-light leading-7'>Bem vinde!</p>
           <p className='text-2xl font-bold leading-7 mb-8'>Acesse sua conta</p>
@@ -27,7 +27,7 @@ function LoginPage(){
         </form>
       </div>
       
-    </div>
+    </>
   )
 }
 
