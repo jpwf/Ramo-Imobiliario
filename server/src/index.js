@@ -1,14 +1,15 @@
 import express from 'express';
 import morgan from 'morgan';
+import MongoDB from './database/MongoDB.js';
+
+import userRoutes from './routes/userRoutes.js';
 const app = express();
 import connectDatabase from './database/db.js'
 
-app.use(morgan('dev'));
-app.get('/', (req, res) => {
-  return res.send('Hello world');
-})
+app.use(process.env.enviroment === 'development' ? morgan('dev') : morgan('combined'));
+app.use(express.json());
+app.mongoose = new MongoDB();
 
-connectDatabase()
+app.use('/users', userRoutes);
 
-app.listen(3000);
-
+app.listen(process.env.port);

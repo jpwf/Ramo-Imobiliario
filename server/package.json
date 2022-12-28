@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon --exec node scripts/dev.cjs",
     "test": "echo \"Erro: nenhum teste especificado\" && exit 1"
   },
   "dependencies": {

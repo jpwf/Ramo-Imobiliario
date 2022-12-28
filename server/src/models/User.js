@@ -1,17 +1,31 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
-const ObjectId = Schema.ObjectId
 
 const UserSchema = new Schema({
-    _id: ObjectId,
     email: {
         type: String,
-        unique: true // nao podemos ter mais de um email igual na aplicacao
+        required: true,
+        unique: true 
     },
-    senha: String, 
-    nomeCompleto: String,
-    telefone: Number, 
-    cpf: String
+    password: {
+        type: String,
+        required: true
+    }, 
+    name: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String, 
+        required: true,
+        unique: true
+    },
+    cpf: {
+        type: String,
+        required: true,
+        unique: true
+        
+    }
 })
 
 const UserModel = mongoose.model('users', UserSchema)
