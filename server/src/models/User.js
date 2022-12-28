@@ -1,11 +1,14 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
 const UserSchema = new Schema({
-    id: ObjectId,
-    email: String,
-    hashSenha: String, 
+    _id: ObjectId,
+    email: {
+        type: String,
+        unique: true // nao podemos ter mais de um email igual na aplicacao
+    },
+    senha: String, 
     nomeCompleto: String,
     telefone: Number, 
     cpf: String
@@ -14,6 +17,3 @@ const UserSchema = new Schema({
 const UserModel = mongoose.model('users', UserSchema)
 
 export default UserModel
-
-
-
