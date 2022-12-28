@@ -7,9 +7,8 @@ export default class UserController {
     }
 
     static async store(req, res) {
-        const { nomeCompleto, email } = req.body;
-        const user = await UserModel.create({ nomeCompleto, email });
+        const { email, password, name, phone, cpf } = req.body;
+        const user = await UserModel.create({ email, password, name, phone, cpf });
         return res.json(user);
     }
-};
-
+}

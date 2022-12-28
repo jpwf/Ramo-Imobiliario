@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
+import bcrypt from 'bcrypt'
 
 const UserSchema = new Schema({
     email: {
@@ -26,6 +27,12 @@ const UserSchema = new Schema({
         unique: true  
     }
 })
+
+UserSchema.pre("save", async function (next) {
+    this.password = await bcrypt.hash(this.password, 8)
+    next()
+})
+
 
 const UserModel = mongoose.model('users', UserSchema)
 
