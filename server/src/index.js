@@ -4,7 +4,6 @@ import MongoDB from './database/MongoDB.js';
 
 import userRoutes from './routes/userRoutes.js';
 const app = express();
-import connectDatabase from './database/db.js'
 
 app.use(process.env.enviroment === 'development' ? morgan('dev') : morgan('combined'));
 app.use(express.json());
