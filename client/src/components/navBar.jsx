@@ -1,13 +1,19 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import logo from '../assets/logo.png'
 
 import { List } from 'phosphor-react';
+=======
+import React from 'react';
+import logo from '../assets/logo.png'
+>>>>>>> 019b068a27e12661fbf112023f8f32ec98735471
 // import {Link} from 'react-router-dom'
 function Navbar() {
   
   const [navbar, serNavbar] = useState(false);
 
   return (
+<<<<<<< HEAD
     <nav className=' w-full text-base border-b-[1px] border-b-gray-300'>
       <div className="flex justify-between h-20 items-center">
           <a href="#" className='flex items-center py-5 md:ml-9 lg:ml-20 md:py-2'>
@@ -57,6 +63,29 @@ function Navbar() {
           </a>        
         </div>
     </nav>
+=======
+    <>
+    <div className=" w-full h-24 flex justify-between items-center text-base border-b-[1px] border-b-gray-300">
+      <img className='ml-12 lg:ml-20'src={logo}/>
+        <div className='w-full flex justify-center'>
+          <a className=""> Início </a>
+          <a className="px-16"> Buscar imóveis</a>
+          <a className=""> Anunciar </a>
+        </div>
+      
+      <div className="flex mr-12 lg:mr-20">
+        <button type='button' className=" mr-8"> Entrar </button>
+        <button
+          type='button'
+          className=" py-3 px-4 bg-blue-500 text-white rounded w-32 "
+        > 
+          Cadastre-se
+        </button>
+      </div>
+
+    </div>
+  </>
+>>>>>>> 019b068a27e12661fbf112023f8f32ec98735471
   )
 }
  
