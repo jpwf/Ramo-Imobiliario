@@ -18,7 +18,7 @@ function ensureEnvVariables() {
         throw new Error('MongoDB URI not found. Set the environment variable "mongodb_uri" with your MongoDB URI.');
 }
 
-if (!importDotEnv(path.join(__dirname, '..', '.env'))) {
-    ensureEnvVariables();
-    import('../src/index.js');
-}
+importDotEnv(path.join(__dirname, '..', '.env'));
+ensureEnvVariables();
+
+import('../src/index.js');
