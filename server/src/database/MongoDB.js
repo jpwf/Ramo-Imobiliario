@@ -11,6 +11,5 @@ export default class MongoDB {
         this.mongoose.connection.once('open', function() {
             console.log('MongoDB conectado com sucesso!');
         });
-
     }
 };
