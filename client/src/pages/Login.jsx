@@ -24,7 +24,7 @@ function LoginPage(){
             <div className='flex border rounded-lg border-gray-400'>
               <Password size={28} color='#9CA3AF' className='mt-[10px] ml-2'/>
               <input type="password" className='border-solid   px-4 py-3 ' placeholder="Digite sua senha"></input>
-              <EyeSlash size={24} color='#9CA3AF' className='ml-3 mr-1 my-3'/>
+              {/*<EyeSlash size={24} color='#9CA3AF' className='ml-3 mr-1 my-3'/>*/}
               
             </div>
             
