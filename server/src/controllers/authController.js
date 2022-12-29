@@ -6,4 +6,3 @@ export default class AuthController {
         return res.json(users);
     }
 }
-

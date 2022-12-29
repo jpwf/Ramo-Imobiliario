@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
+        select: false,
         required: true
     }, 
     name: {
@@ -32,7 +33,6 @@ UserSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 8)
     next()
 })
-
 
 const UserModel = mongoose.model('users', UserSchema)
 

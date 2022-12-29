@@ -7,9 +7,9 @@ export default class MongoDB {
         this.mongoose.connect(process.env.mongodb_uri, { 
             useNewUrlParser: true,
         });
-        this.mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+        this.mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
         this.mongoose.connection.once('open', function() {
-            console.log('MongoDB conectado com sucesso!');
+            console.log('MongoDB connection established successfully');
         });
     }
 };
