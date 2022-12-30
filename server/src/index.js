@@ -10,7 +10,7 @@ app.use(process.env.enviroment === 'development' ? morgan('dev') : morgan('combi
 app.use(express.json());
 app.mongoose = new MongoDB();
 
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
 app.use('/login', userRoutes);
 
 
