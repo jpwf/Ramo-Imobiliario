@@ -2,6 +2,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
+import Navbar from '../components/navBar';
 
 Yup.setLocale({
     mixed: {
@@ -32,12 +33,10 @@ function Register() {
     
     return (
         <div className="bg-white h-screen flex flex-col min-h-screen items-center">
-            <div className="w-full py-5 flex items-center justify-center bg-gray-500 border-b border-gray-300 p-8 lg:justify-center">
-                NAVBAR
-            </div>
-            <div className='flex flex-wrap gap-28 justify-evenly items-center mt-24 w-4/5'>
+            <Navbar />
+            <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
                 <img 
-                    className='w-full max-w-lg max-h-[523px] sm:min-w-fit sm:min-h-fit'
+                    className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
                     src="src/assets/register-img.png" alt="boneco segurando cartão identificador" 
                     />
                 
