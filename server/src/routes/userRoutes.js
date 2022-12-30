@@ -1,9 +1,15 @@
-import express from 'express';
+import { Router } from 'express';
 import userController from '../controllers/userController.js';
+import authController from '../controllers/authController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
-const router = express.Router();
+const router = Router();
 
-router.get('/', userController.index);
-router.post('/', userController.store);
+router.post('/register', userController.store);
+router.post('/login', authController.login);
+router.get('/test', authMiddleware, (req, res) => {
+    res.send({ id: req.userInfo.id });
+});
 
 export default router;
+
