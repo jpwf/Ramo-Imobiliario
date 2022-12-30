@@ -1,44 +1,94 @@
 import React from 'react';
+import * as Yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from "react-hook-form"
+
 import LoginImage from '../assets/login-img.png'
-import Navbar from  '../components/navBar'
-import {EnvelopeSimple, Password, EyeSlash } from 'phosphor-react'
-function LoginPage(){
-  return(
-    <>
-      <Navbar/>
-      <div className='flex flex-row justify-between'>
-        <img className='ml-56 mt-24 max-h-[493px] 'src={LoginImage}/>
-        <form className='flex flex-col w-auto h-auto px-12  mt-24 pt-12 mb-48 border border-solid rounded-xl border-gray-400 mr-40'>
-          <p className='text-2xl font-light leading-7'>Bem vinde!</p>
-          <p className='text-2xl font-bold leading-7 mb-8'>Acesse sua conta</p>
-          <label className='flex flex-col mb-4'>
-            E-mail
-            <div className='flex border rounded-lg border-gray-400'>
-              <EnvelopeSimple size={28} color='#9CA3AF' className='mt-[10px] ml-2'/>
-              <input type="email"  className='border-solid   px-4 py-3 'placeholder="Digite seu email"></input>
+import Navbar from '../components/navBar'
+import { EnvelopeSimple, Password, EyeSlash } from 'phosphor-react'
+function LoginPage() {
+
+  const schema = Yup.object().shape({
+    email: Yup.string().email("E-mail inválido").required(),
+    password: Yup.string().min(6, "Necessário no mínimo 6 dígitos").required(),
+  });
+
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const submitForm = (data) => {
+    console.log({ data });
+    reset();
+  }
+
+  return (
+
+    <div className=" bg-white h-screen flex flex-col min-h-screen items-center">
+      <Navbar />
+      <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
+        <img
+          className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
+          src={LoginImage} alt="boneco segurando cartão identificador"
+        />
+
+        <div className=" w-full max-w-[535px] flex flex-col p-14 mb-4 items-center bg-white rounded-lg ring-[0.5px] ring-gray-400 ">
+          <div className='w-full items-start mb-8'>
+            <p className='text-gray-900 text-base font-normal'>
+              Bem-vinde!
+            </p>
+            <strong className='text-gray-900 text-3xl font-bold lg:text-2xl'>Acesse sua conta</strong>
+          </div>
+          <form onSubmit={handleSubmit(submitForm)} className="w-full">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="email">
+                E-mail
+              </label>
+              <div className='flex shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
+                <EnvelopeSimple size={18} className="text-gray-400" />
+                <input
+
+                  className="w-full outline-0"
+                  id="email" name='email' type="email" placeholder="Digite e-mail"
+                  {...register('email')} required
+                />
+              </div>
+              <p className="text-red-600 text-xs">{errors.email?.message}</p>
             </div>
-            
-          </label>
-          <label className='flex flex-col mb-6'>
-            Senha
-            <div className='flex border rounded-lg border-gray-400'>
-              <Password size={28} color='#9CA3AF' className='mt-[10px] ml-2'/>
-              <input type="password" className='border-solid   px-4 py-3 ' placeholder="Digite sua senha"></input>
-              {/*<EyeSlash size={24} color='#9CA3AF' className='ml-3 mr-1 my-3'/>*/}
-              
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="password">
+                Senha
+              </label>
+              <div className='flex shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
+                <Password size={18} className="text-gray-400" />
+                <input
+                  className="w-full outline-0"
+                  id="password" type="password" placeholder="Digite sua senha"
+                  {...register('password')} required
+                />
+              </div>
+              <p className="text-red-600 text-xs">{errors.password?.message}</p>
+
             </div>
-            
-          </label>
-          <label className='mb-8'>
-            <input type="checkbox" className='mx-2'></input>
-            Lembre-se de mim
-          </label>
-          <button type="submit" className='mb-6 flex  w-[422px] h-[43px] justify-center items-center px-3 py-4 bg-blue-500 text-white '>Entrar</button>
-          <p className='mb-12'>Não Possui uma conta? <button className='font-bold justify-center items-center'type="submit">Cadastre-se</button></p>
-        </form>
+            <div className='flex items-center mb-8'>
+              <input id='rememberMe' type="checkbox" value='' className='form-checkbox mr-2 w-4 h-4 border border-gray-400 rounded text-blue-400 focus:ring-blue-300 transition duration-200 cursor-pointer'></input>
+              <label htmlFor="rememberMe" className='text-sm font-medium text-gray-700 cursor-pointer'> Lembre-se de mim</label>
+            </div>
+            <button
+              className="w-full mb-6 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none"
+              type="submit"
+            >
+              Entrar
+            </button>
+
+            <p className="text-base text-center text-gray-500">
+              Não possui uma conta? <a href="/cadastro" className='text-gray-900 font-semibold'>Cadastre-se</a>
+            </p>
+          </form>
+        </div>
       </div>
-      
-    </>
+    </div>
+
   )
 }
 
