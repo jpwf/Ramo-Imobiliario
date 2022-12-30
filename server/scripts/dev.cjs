@@ -14,8 +14,14 @@ function importDotEnv(envPath) {
 function ensureEnvVariables() {
     process.env.port = Number(process.env.port) || 3000;
     process.env.enviroment = process.env.enviroment || 'development';
+    if (!process.env.secret)
+        notFound('Secret', 'secret');
     if (!process.env.mongodb_uri)
-        throw new Error('MongoDB URI not found. Set the environment variable "mongodb_uri" with your MongoDB URI.');
+        notFound('MongoDB URI', 'mongodb_uri');
+
+    function notFound(name, varName) {
+        throw new Error(`Environment variable "${varName}" not found. Set the environment variable "${varName}" with your ${name}.`);
+    }
 }
 
 importDotEnv(path.join(__dirname, '..', '.env'));
