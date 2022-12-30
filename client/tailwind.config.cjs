@@ -8,7 +8,14 @@ module.exports = {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        login: "url('/login-img.png')" ,
+        register: "url('/register-img.png')",
+      }
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")({
+    strategy: 'class'
+  })],
 }
