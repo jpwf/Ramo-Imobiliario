@@ -2,7 +2,10 @@ import React from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
-import Navbar from '../components/navBar';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import notificacao from '../utils/notificacao';
 
 Yup.setLocale({
     mixed: {
@@ -10,7 +13,9 @@ Yup.setLocale({
     }
 });
 
-function Register() { 
+function Register() {
+    const navigate = useNavigate();
+
     const phoneRegExp = /^\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\)? ?9[1-9][0-9]{3}\-?[0-9]{4}$/;
 
     const schema = Yup.object().shape({
@@ -22,24 +27,38 @@ function Register() {
         confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], "As senhas precisam ser iguais").required(),
     });
 
+    async function cadastrarUsuario(data) {
+
+        await axios.post('/user/register', data)
+            .then(() => {
+                notificacao(true, "Usuário cadastrado!");
+                setTimeout(() => navigate('/login'), 3000);
+            }
+            )
+    }
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema),
     });
-    
+
     const submitForm = (data) => {
-        console.log({data});
+        const usuario = data;
+        try {
+            cadastrarUsuario(usuario);
+        } catch (error) {
+            console.error(error);
+        }
         reset();
     }
-    
+
     return (
         <div className="bg-white h-screen flex flex-col min-h-screen items-center">
-            <Navbar />
             <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
-                <img 
+                <img
                     className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
-                    src="src/assets/register-img.png" alt="boneco segurando cartão identificador" 
-                    />
-                
+                    src="src/assets/register-img.png" alt="boneco segurando cartão identificador"
+                />
+
                 <div className=" w-full max-w-[535px] flex flex-col p-14 mb-4 items-center bg-white rounded-lg ring-[0.5px] ring-gray-400 ">
                     <strong className='text-gray-900 text-3xl font-bold lg:text-2xl'>
                         Crie sua conta
@@ -48,21 +67,21 @@ function Register() {
                     <form onSubmit={handleSubmit(submitForm)} className="w-full">
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="name">
-                            Nome Completo
+                                Nome Completo
                             </label>
-                            <input 
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400" 
-                                id="name" name='name' type="text" placeholder="Digite seu nome completo" 
+                            <input
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400"
+                                id="name" name='name' type="text" placeholder="Digite seu nome completo"
                                 {...register('name')} required
                             />
                             <p className="text-red-600 text-xs">{errors.name?.message}</p>
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="cpf">
-                            CPF
+                                CPF
                             </label>
-                            <input 
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400" 
+                            <input
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400"
                                 id="cpf" name='cpf' type="text" placeholder="Digite seu CPF"
                                 {...register('cpf')} required
                             />
@@ -70,32 +89,32 @@ function Register() {
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="phone">
-                            Telefone
+                                Telefone
                             </label>
-                            <input 
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400" 
-                                id="phone" name='phone' type="tel" placeholder="(xx) xxxxx-xxxx" 
+                            <input
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400"
+                                id="phone" name='phone' type="tel" placeholder="(xx) xxxxx-xxxx"
                                 {...register('phone')} required
                             />
                             <p className="text-red-600 text-xs">{errors.phone?.message}</p>
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="email">
-                            E-mail
+                                E-mail
                             </label>
-                            <input 
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400" 
-                                id="email" name='email' type="email" placeholder="Digite seu melhor e-mail" 
+                            <input
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400"
+                                id="email" name='email' type="email" placeholder="Digite seu melhor e-mail"
                                 {...register('email')} required
                             />
                             <p className="text-red-600 text-xs">{errors.email?.message}</p>
                         </div>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="password">
-                            Senha
+                                Senha
                             </label>
-                            <input 
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400" 
+                            <input
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400"
                                 id="password" type="password" placeholder="Digite sua senha"
                                 {...register('password')} required
                             />
@@ -103,25 +122,25 @@ function Register() {
                         </div>
                         <div className="mb-8">
                             <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="confirmPassword">
-                            Confirme sua senha
+                                Confirme sua senha
                             </label>
-                            <input 
-                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400" 
-                                id="confirmPassword" name='confirmPassword' type="password" placeholder="Confirme sua senha" 
+                            <input
+                                className="shadow appearance-none border rounded w-full py-3 px-4 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-gray-400 focus:ring-1 focus:ring-blue-400"
+                                id="confirmPassword" name='confirmPassword' type="password" placeholder="Confirme sua senha" autoComplete='on'
                                 {...register('confirmPassword')} required
                             />
                             <p className="text-red-600 text-xs">{errors.confirmPassword?.message}</p>
                         </div>
-                        
-                        <button 
-                            className="w-full mb-6 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+
+                        <button
+                            className="w-full mb-6 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
-                        Cadastre-se
+                            Cadastre-se
                         </button>
-                        
+
                         <p className="text-base text-center text-gray-500">
-                        Já possui uma conta? <a href="/login" className='text-gray-900 font-semibold'>Faça o login</a>
+                            Já possui uma conta? <Link to={"/login"} className='text-gray-900 font-semibold'>Faça o login</Link>
                         </p>
                     </form>
                 </div>

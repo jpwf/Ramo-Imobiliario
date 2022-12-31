@@ -2,11 +2,15 @@ import React from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 import LoginImage from '../assets/login-img.png'
-import Navbar from '../components/navBar'
 import { EnvelopeSimple, Password, EyeSlash } from 'phosphor-react'
+
 function LoginPage() {
+  const navigate = useNavigate();
 
   const schema = Yup.object().shape({
     email: Yup.string().email("E-mail inválido").required(),
@@ -17,15 +21,28 @@ function LoginPage() {
     resolver: yupResolver(schema),
   });
 
-  const submitForm = (data) => {
-    console.log({ data });
+  async function logarUsuario(data) {
+    await axios.post('/user/login', data)
+    .then(res => {
+      localStorage.setItem('usuario', JSON.stringify(res.data.name));
+      localStorage.setItem('token', JSON.stringify(res.data.token));
+      navigate('/');
+    })
+    .catch(error => {
+     console.error(error);
+    })
+ }
+
+  const submitForm = async (e) => {
+    const user = data;
+    logarUsuario(user);
     reset();
+    
   }
 
   return (
 
     <div className=" bg-white h-screen flex flex-col min-h-screen items-center">
-      <Navbar />
       <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
         <img
           className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
@@ -63,7 +80,7 @@ function LoginPage() {
                 <Password size={18} className="text-gray-400" />
                 <input
                   className="w-full outline-0"
-                  id="password" type="password" placeholder="Digite sua senha"
+                  id="password" type="password" placeholder="Digite sua senha" autoComplete='on'
                   {...register('password')} required
                 />
               </div>
@@ -82,7 +99,7 @@ function LoginPage() {
             </button>
 
             <p className="text-base text-center text-gray-500">
-              Não possui uma conta? <a href="/cadastro" className='text-gray-900 font-semibold'>Cadastre-se</a>
+              Não possui uma conta? <Link to={"/cadastro"} className='text-gray-900 font-semibold'>Cadastre-se</Link>
             </p>
           </form>
         </div>
