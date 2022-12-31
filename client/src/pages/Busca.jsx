@@ -2,7 +2,21 @@
 function Busca() {
     return(
         <div>
-            <h1>Página de Busca</h1>
+            <div className='justify-between'>
+                <div className='flex flex-col'>
+                    <h3>Bairro</h3>
+                    <select></select>
+                </div>
+                <div className='flex flex-col'>
+                    <h3>Número de quartos</h3>
+                <select></select>
+                </div>
+                
+                
+            </div>
+            <select></select>
+            
+            
         </div>
     )
 }
