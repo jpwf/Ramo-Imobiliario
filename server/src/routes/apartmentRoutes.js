@@ -15,7 +15,7 @@ router.post('/publish', authMiddleware, (req, res, next) => {
             complement: Joi.string().max(100).default(''),
         }),
         image: Joi.string().uri().default(''),
-        price: Joi.number().min(1).max(1000000).required(),
+        price: Joi.number().min(1).max(300000000).required(),
         description: Joi.string().min(3).max(1000).required()
     });
 
