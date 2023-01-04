@@ -73,6 +73,20 @@
         {
             "id": 6,
             "numberOfBedrooms": 3,
+            "price": 400000.00,
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
+            "image": "http://localhost:3000/cardImage.png",
+            "address": {
+                "street": "Rua de Alguém",
+                "number": "100",
+                "district": "Lapa",
+                "complement": "Apt 171"
+            },
+            "userId": 2
+        },
+        {
+            "id": 7,
+            "numberOfBedrooms": 3,
             "price": 800000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
             "image": "http://localhost:3000/cardImage.png",
@@ -81,6 +95,34 @@
                 "number": "99",
                 "district": "Laranjeiras",
                 "complement": "Apt 1801"
+            },
+            "userId": 2
+        },
+        {
+            "id": 8,
+            "numberOfBedrooms": 3,
+            "price": 1650000.00,
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
+            "image": "http://localhost:3000/cardImage.png",
+            "address": {
+                "street": "Av. Tal Coisa",
+                "number": "50",
+                "district": "Barra da Tijuca",
+                "complement": "Apt 501"
+            },
+            "userId": 2
+        },
+        {
+            "id": 9,
+            "numberOfBedrooms": 3,
+            "price": 650000.00,
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
+            "image": "http://localhost:3000/cardImage.png",
+            "address": {
+                "street": "Travessa Algo",
+                "number": "81",
+                "district": "Flamengo",
+                "complement": "Apt 1981"
             },
             "userId": 2
         }

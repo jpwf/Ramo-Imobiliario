@@ -39,7 +39,7 @@ function Busca() {
                 <SelectComponent value='Mais recentes' defaultV='Mais recentes' />
             </div>
             <div className='w-screen grid grid-cols-1 justify-items-center content-start md:grid-cols-3 gap-8 md:gap-[62px] mt-8 px-14 lg:px-[106px] mb-10'>
-                {apartaments && apartaments.length > 0 && apartaments.map(apartament => {
+                {apartaments && apartaments.length > 0 && apartaments.slice(0, 6).map(apartament => {
                     return(
                         <AptCard key={apartament.id}
                             img={apartament.image}

@@ -37,12 +37,12 @@ export default function AptCard(props) {
           <Typography className='text-blue-500 mb-2' variant='subtitle2'>
             {props.name}
           </Typography>
-          <Typography className='mb-2 text-xl text-gray-800 font-medium'>
+          <Typography className='mb-2 text-base lg:text-xl text-gray-800 font-semibold'>
             {props.street}
           </Typography>
           <div className='flex p-0 gap-2'>
-            <Chip className='bg-blue-900' label={props.numberOfBedrooms} color='primary' />
-            <Chip className='bg-blue-900' label={props.price} color='primary' />
+            <Chip className='bg-blue-900 text-sm lg:text-base ' label={props.numberOfBedrooms} color='primary' />
+            <Chip className='bg-blue-900 text-sm lg:text-base ' label={props.price} color='primary' />
           </div>
         </CardContent>
       </CardActionArea>
