@@ -43,8 +43,4 @@ export default class ApartmentController {
             res.status(500).json({ message: error.message });
         }
     }
-
-    static async #validateSortBy(sortBy) {
-        return ['price', 'created_at'].includes(sortBy) ? sortBy : 'created_at';
-    }
 }
