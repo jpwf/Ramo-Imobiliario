@@ -11,6 +11,6 @@ export const getApartaments = async (name, email) => {
         return await UserModel.find({ name: name }, {__v: 0})
     }
 
-    return await UserModel.find({ name: name, email: email}, {__v: 0}) //.sort({_id: -1}) para pegar o mais recente;
+    return await UserModel.find({ name: name, email: email}, {__v: 0}) //.sort({_id: -1}) para pegar os mais recentes
 };
 
