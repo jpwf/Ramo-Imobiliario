@@ -28,15 +28,15 @@ export default class ApartmentController {
     }
     
     static async create(req, res) {
-        const { numberOfBedrooms, address, price, description } = req.body;
+        const { image, numberOfBedrooms, address, price, description } = req.body;
         try {
             const apartment = await ApartmentModel.create({ 
                 numberOfBedrooms,
-                image: '',
+                image,
                 address,
                 price,
                 description,
-                owner: req.userInfo.id
+                userId: req.userInfo.id
             });
             res.status(201).json(apartment);
         } catch (error) {
