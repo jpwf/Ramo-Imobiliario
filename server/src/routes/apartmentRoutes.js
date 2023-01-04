@@ -13,7 +13,7 @@ router.get('/search', (req, res) => {
         return res.status(400).json({ message: 'Bad request: missing parameters' });
     }
 
-    if (['price', 'created_at'].includes(sortBy))
+    if (!['price', 'created_at'].includes(sortBy))
         req.sortBy = 'created_at';
 }, apartmentController.getSome);
 router.get('/:id', apartmentController.show);
