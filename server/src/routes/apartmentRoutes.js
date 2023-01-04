@@ -5,10 +5,29 @@ import apartmentController from '../controllers/apartmentController.js';
 
 const router = Router();
 
-router.post('/publish', authMiddleware, apartmentController.create);
+router.post('/publish', authMiddleware, (req, res, next) => {
+    const schema = Joi.object({
+        numberOfBedrooms: Joi.number().min(1).max(20).required(),
+        address: Joi.object({
+            street: Joi.string().min(3).max(50).required(),
+            number: Joi.number().min(1).max(1000).required(),
+            district: Joi.string().min(3).max(20).required(),
+            complement: Joi.string().max(100).default(''),
+        }),
+        image: Joi.string().uri().default(''),
+        price: Joi.number().min(1).max(1000000).required(),
+        description: Joi.string().min(3).max(1000).required()
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+        return res.status(400).json({ message: error.details[0].message });
+    }
+    return next();
+}, apartmentController.create);
 router.get('/search', (req, res, next) => {
     const schema = Joi.object({
-        numberOfBedrooms: Joi.number().min(1).max(5).default(1),
+        numberOfBedrooms: Joi.number().min(1).max(20),
         district: Joi.string().min(3).max(20).required(),
         sortBy: Joi.string().valid('price', 'created_at').default('created_at'),
         page: Joi.number().min(1).default(1),
