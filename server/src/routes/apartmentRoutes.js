@@ -12,9 +12,9 @@ router.post('/publish', authMiddleware, (req, res, next) => {
             street: Joi.string().min(3).max(128).required(),
             number: Joi.string().min(1).max(10).required(),
             district: Joi.string().min(3).max(20).required(),
-            complement: Joi.string().max(100).default(''),
+            complement: Joi.string().max(100),
         }),
-        image: Joi.string().uri().default(''),
+        image: Joi.string().uri().default('\0'),
         price: Joi.number().min(1).max(300000000).required(),
         description: Joi.string().min(3).max(1000).required()
     });
