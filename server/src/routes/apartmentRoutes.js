@@ -8,7 +8,7 @@ const router = Router();
 router.post('/publish', authMiddleware, apartmentController.create);
 router.get('/search', (req, res, next) => {
     const schema = Joi.object({
-        numberOfBedrooms: Joi.number().min(1).max(5).default(1),
+        numberOfBedrooms: Joi.number().min(1).max(20),
         district: Joi.string().min(3).max(20).required(),
         sortBy: Joi.string().valid('price', 'created_at').default('created_at'),
         page: Joi.number().min(1).default(1),
