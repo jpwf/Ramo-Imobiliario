@@ -12,6 +12,7 @@ app.mongoose = new MongoDB();
 
 app.use('/user', userRoutes);
 app.use('/login', userRoutes);
+app.use('/apartment', userRoutes);
 
 
 app.listen(process.env.port);
