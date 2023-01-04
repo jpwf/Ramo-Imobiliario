@@ -22,7 +22,7 @@ import React from 'react';
 //   )
 // }
 
-export default function AptCard() {
+export default function AptCard(props) {
   return (
     <Card className='w-full min-w-min' >
       <CardActionArea>
@@ -30,19 +30,19 @@ export default function AptCard() {
           component="img"
           height="200"
           width="368"
-          image='src/assets/cardImage.png'
+          image={props.img}
           alt="apartamento"
         />
         <CardContent className='flex flex-col'>
           <Typography className='text-blue-500 mb-2' variant='subtitle2'>
-            Nome Vendedor(a)
+            {props.name}
           </Typography>
           <Typography className='mb-2 text-xl text-gray-800 font-medium'>
-            Praia de Botafogo
+            {props.street}
           </Typography>
           <div className='flex p-0 gap-2'>
-            <Chip className='bg-blue-900' label="4 Quartos" color='primary' />
-            <Chip className='bg-blue-900' label="R$1000000" color='primary' />
+            <Chip className='bg-blue-900' label={props.numberOfBedrooms} color='primary' />
+            <Chip className='bg-blue-900' label={props.price} color='primary' />
           </div>
         </CardContent>
       </CardActionArea>
