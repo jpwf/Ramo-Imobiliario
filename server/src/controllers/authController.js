@@ -3,7 +3,6 @@ import jwtService from '../services/auth.js';
 
 export default class AuthController {
     static async login(req, res) {
-        console.log(req.body);
         try {
             const user = await getUserWithAuthInfo(req.body.email);
             if (!user)
