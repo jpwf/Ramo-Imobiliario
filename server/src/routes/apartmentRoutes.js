@@ -9,8 +9,8 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     const schema = Joi.object({
         numberOfBedrooms: Joi.number().min(1).max(20).required(),
         address: Joi.object({
-            street: Joi.string().min(3).max(50).required(),
-            number: Joi.number().min(1).max(1000).required(),
+            street: Joi.string().min(3).max(128).required(),
+            number: Joi.string().min(1).max(10).required(),
             district: Joi.string().min(3).max(20).required(),
             complement: Joi.string().max(100).default(''),
         }),
