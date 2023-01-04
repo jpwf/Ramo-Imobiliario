@@ -6,9 +6,10 @@ import axios from 'axios'
 import AptCard from '../components/AptCard.jsx';
 import SelectComponent from '../components/SelectComponent';
 import PaginationLink from '../utils/Pagination';
+import BasicModal from '../components/Modal';
 function Busca() {
     const [apartaments, setApartaments] = useState([]);
-    
+
     const getData = async () => {
         try {
             const res = await axios.get('db.json', {
@@ -18,7 +19,6 @@ function Busca() {
                 },
             });
             setApartaments(res.data.apartaments);
-            console.log(res.data.apartaments)
         } catch (err) {
             console.log(err);
         }
@@ -40,14 +40,24 @@ function Busca() {
             </div>
             <div className='w-screen grid grid-cols-1 justify-items-center content-start md:grid-cols-3 gap-8 md:gap-[62px] mt-8 px-14 lg:px-[106px] mb-10'>
                 {apartaments && apartaments.length > 0 && apartaments.slice(0, 6).map(apartament => {
-                    return(
-                        <AptCard key={apartament.id}
-                            img={apartament.image}
-                            name={apartament.name}
-                            street={apartament.address.street}
-                            numberOfBedrooms={apartament.numberOfBedrooms > 1 ? `${apartament.numberOfBedrooms} Quartos` : `${apartament.numberOfBedrooms} Quarto`} 
-                            price={`R$${apartament.price}`} 
-                        />
+                    return (
+                        <div>
+                            <AptCard key={apartament.id}
+                                img={apartament.image}
+                                name={apartament.name}
+                                street={apartament.address.street}
+                                numberOfBedrooms={apartament.numberOfBedrooms > 1 ? `${apartament.numberOfBedrooms} Quartos` : `${apartament.numberOfBedrooms} Quarto`}
+                                price={`R$${apartament.price}`}
+                            />
+                            <BasicModal
+                                img={apartament.image}
+                                name={apartament.name}
+                                street={apartament.address.street}
+                                description={apartament.description}
+                                numberOfBedrooms={apartament.numberOfBedrooms > 1 ? `${apartament.numberOfBedrooms} Quartos` : `${apartament.numberOfBedrooms} Quarto`}
+                                price={`R$${apartament.price}`}
+                            />
+                        </div>
                     )
                 })}
             </div>
