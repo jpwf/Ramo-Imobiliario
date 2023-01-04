@@ -2,7 +2,7 @@ import ApartmentModel from '../models/Apartment.js';
 
 export default class ApartmentController {
     static async getSome(req, res) {
-        const { numberOfBedrooms, district, page = 1, limit = 20, sortBy } = req.query;
+        const { numberOfBedrooms, district, page, limit, sortBy } = req.query;
         
         try {
             const apartments = await ApartmentModel.find({
@@ -11,7 +11,7 @@ export default class ApartmentController {
             })
                 .limit(limit)
                 .skip((page - 1) * limit)
-                .sort(ApartmentController.#validateSortBy(sortBy));
+                .sort(sortBy);
             res.status(200).json(apartments);
         } catch (error) {
             res.status(500).json({ message: error.message });
