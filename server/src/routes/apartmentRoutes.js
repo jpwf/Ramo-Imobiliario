@@ -14,7 +14,7 @@ router.post('/publish', authMiddleware, (req, res, next) => {
             district: Joi.string().min(3).max(20).required(),
             complement: Joi.string().max(100),
         }),
-        image: Joi.string().uri().default('\0'),
+        image: Joi.string().default('\0'),
         price: Joi.number().min(1).max(300000000).required(),
         description: Joi.string().min(3).max(1000).required()
     });
@@ -29,7 +29,7 @@ router.get('/search', (req, res, next) => {
     const schema = Joi.object({
         numberOfBedrooms: Joi.number().min(1).max(20),
         district: Joi.string().min(3).max(20).required(),
-        sortBy: Joi.string().valid('price', 'created_at').default('created_at'),
+        sortBy: Joi.string().valid('newer', 'publication_order').default('publication_order'),
         page: Joi.number().min(1).default(1),
         limit: Joi.number().min(1).max(100).default(20)
     });
@@ -38,6 +38,7 @@ router.get('/search', (req, res, next) => {
     if (error) {
         return res.status(400).json({ message: error.details[0].message });
     }
+
     return next();
 }, apartmentController.getSome);
 router.get('/:id', apartmentController.show);

@@ -8,7 +8,7 @@ export default class ApartmentController {
             const apartments = await ApartmentModel.find(buildQuery(req.query))
                 .limit(limit)
                 .skip((page - 1) * limit)
-                .sort(sortBy);
+                .sort({"_id": sortBy === 'newer' ? -1 : 1});
             res.status(200).json(apartments);
         } catch (error) {
             res.status(500).json({ message: error.message });
