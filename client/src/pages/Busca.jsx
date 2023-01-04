@@ -1,14 +1,17 @@
 //import Card from '../components/Card'
-import { Pagination } from '@mui/material';
+// import { Pagination } from '@mui/material';
 import { useEffect, useState } from 'react';
-import cardimage from '../assets/cardImage.png'
+// import cardimage from '../assets/cardImage.png'
 import axios from 'axios'
 import AptCard from '../components/AptCard.jsx';
 import SelectComponent from '../components/SelectComponent';
 import PaginationLink from '../utils/Pagination';
 import BasicModal from '../components/Modal';
+
+
 function Busca() {
     const [apartaments, setApartaments] = useState([]);
+    
 
     const getData = async () => {
         try {
@@ -48,14 +51,19 @@ function Busca() {
                                 street={apartament.address.street}
                                 numberOfBedrooms={apartament.numberOfBedrooms > 1 ? `${apartament.numberOfBedrooms} Quartos` : `${apartament.numberOfBedrooms} Quarto`}
                                 price={`R$${apartament.price}`}
+                                
+                                
                             />
+                            
                             <BasicModal
+                                
                                 img={apartament.image}
                                 name={apartament.name}
                                 street={apartament.address.street}
                                 description={apartament.description}
                                 numberOfBedrooms={apartament.numberOfBedrooms > 1 ? `${apartament.numberOfBedrooms} Quartos` : `${apartament.numberOfBedrooms} Quarto`}
                                 price={`R$${apartament.price}`}
+                                
                             />
                         </div>
                     )

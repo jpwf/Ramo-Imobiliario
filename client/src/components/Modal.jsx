@@ -31,7 +31,7 @@ export default function BasicModal(props) {
 
     return (
         <div>
-            <button onClick={handleOpen}>Open modal</button>
+            <button className='bg-blue-400 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded ' onClick={handleOpen}>Veja mais</button>
             <Modal
                 open={open}
                 onClose={handleClose}
