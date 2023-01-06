@@ -5,7 +5,7 @@
             "numberOfBedrooms": 4,
             "price": 1000000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Praia de Botafogo",
                 "number": "83",
@@ -19,7 +19,7 @@
             "numberOfBedrooms": 3,
             "price": 750000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Rua General Canabarros",
                 "number": "71",
@@ -33,7 +33,7 @@
             "numberOfBedrooms": 3,
             "price": 500000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Rua Sei Lá",
                 "number": "1230",
@@ -47,7 +47,7 @@
             "numberOfBedrooms": 4,
             "price": 1700000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Avenida Atlântica",
                 "number": "71",
@@ -61,7 +61,7 @@
             "numberOfBedrooms": 1,
             "price": 400000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Rua Alguma Coisa",
                 "number": "13",
@@ -75,7 +75,7 @@
             "numberOfBedrooms": 3,
             "price": 400000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Rua de Alguém",
                 "number": "100",
@@ -89,7 +89,7 @@
             "numberOfBedrooms": 3,
             "price": 800000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Rua das Laranjeiras",
                 "number": "99",
@@ -103,7 +103,7 @@
             "numberOfBedrooms": 3,
             "price": 1650000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Av. Tal Coisa",
                 "number": "50",
@@ -117,7 +117,7 @@
             "numberOfBedrooms": 3,
             "price": 650000.00,
             "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequatur commodi nihil, quaerat voluptatum obcaecati. Architecto consequuntur quisquam, labore inventore maiores sed nobis asperiores unde, mollitia a, distinctio cupiditate velit nemo natus. Rerum labore aliquam cum, quasi tenetur, quod reprehenderit quo culpa totam, voluptatum temporibus. Earum vero tenetur dolorem vitae.",
-            "image": "http://localhost:3000/cardImage.png",
+            "image": "cardImage.png",
             "address": {
                 "street": "Travessa Algo",
                 "number": "81",
