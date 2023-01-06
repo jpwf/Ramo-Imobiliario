@@ -12,6 +12,7 @@ export default function PaginationLink() {
 
     return (
         <Pagination
+            className='mb-16'
             color='primary'
             size='large'
             shape='rounded'

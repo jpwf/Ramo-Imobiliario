@@ -5,15 +5,14 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SelectComponent({ label, value, defaultV }) {
+export default function SelectComponent({ label, values, defaultV }) {
     const [item, setItem] = React.useState('');
-
     const handleChange = (event) => {
         setItem(event.target.value);
     };
 
     return (
-        <div>
+        <>
             <FormControl sx={{ minWidth: 140 }} size='small'>
                 {label
                     ? <InputLabel className='text-sm' id="demo-simple-select-helper-label">{label}</InputLabel>
@@ -31,12 +30,15 @@ export default function SelectComponent({ label, value, defaultV }) {
                     
                 >
                     {defaultV
-                        ? <MenuItem value=""> <em>{defaultV}</em> </MenuItem>
+                        ? <MenuItem value="">{defaultV}</MenuItem>
                         : ''
                     }
-                    <MenuItem value={value}>{value}</MenuItem>
+                    {values ? values.map((value, index) => (
+                        <MenuItem key={index} value={value}>{value}</MenuItem>
+                    )) : null
+                    }
                 </Select>
             </FormControl>
-        </div>
+        </>
     );
 }

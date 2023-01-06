@@ -40,7 +40,7 @@
                 "district": "São Cristovão",
                 "complement": "Bloco A, Apt 2023"
             },
-            "userId": 1
+            "userId": 3
         },
         {
             "id": 4,
@@ -54,7 +54,7 @@
                 "district": "Copacabana",
                 "complement": "Apt 1701"
             },
-            "userId": 3
+            "userId": 4
         },
         {
             "id": 5,
@@ -68,7 +68,7 @@
                 "district": "Centro",
                 "complement": "Apt 1313"
             },
-            "userId": 4
+            "userId": 5
         },
         {
             "id": 6,
@@ -82,7 +82,7 @@
                 "district": "Lapa",
                 "complement": "Apt 171"
             },
-            "userId": 2
+            "userId": 6
         },
         {
             "id": 7,
@@ -96,7 +96,7 @@
                 "district": "Laranjeiras",
                 "complement": "Apt 1801"
             },
-            "userId": 2
+            "userId": 7
         },
         {
             "id": 8,
@@ -107,10 +107,10 @@
             "address": {
                 "street": "Av. Tal Coisa",
                 "number": "50",
-                "district": "Barra da Tijuca",
+                "district": "Copacabana",
                 "complement": "Apt 501"
             },
-            "userId": 2
+            "userId": 8
         },
         {
             "id": 9,
@@ -124,7 +124,7 @@
                 "district": "Flamengo",
                 "complement": "Apt 1981"
             },
-            "userId": 2
+            "userId": 9
         }
     ]
 }

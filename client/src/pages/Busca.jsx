@@ -1,6 +1,6 @@
 //import Card from '../components/Card'
 // import { Pagination } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useId, useMemo } from 'react';
 // import cardimage from '../assets/cardImage.png'
 import axios from 'axios'
 import AptCard from '../components/AptCard.jsx';
@@ -11,7 +11,7 @@ import BasicModal from '../components/Modal';
 
 function Busca() {
     const [apartaments, setApartaments] = useState([]);
-    
+    const id = useId();
 
     const getData = async () => {
         try {
@@ -27,24 +27,40 @@ function Busca() {
         }
     };
 
+    const filterItems = useMemo(() => {
+        const bedroomsValues = [];
+        const districtValues = [];
+
+        apartaments.map(( apartament, index ) => {
+            return(
+                bedroomsValues[index] = parseInt(apartament.numberOfBedrooms),
+                districtValues[index] = apartament.address.district
+                )
+            })
+        const bedroomsValuesUnique = [...new Set(bedroomsValues)]
+        bedroomsValuesUnique.sort()
+        const districtValuesUnique = [...new Set(districtValues)]
+        districtValuesUnique.sort()
+        return{bedroomsValuesUnique, districtValuesUnique};
+    })
+
     useEffect(() => {
         getData()
     }, [])
 
     return (
-        <div className='flex flex-col items-center'>
-            <div className='w-full flex justify-between px-12 lg:px-[98px] mt-16'>
-                <div className='flex gap-4 md:gap-8 lg:12
-                '>
-                    <SelectComponent label='Bairro' value='Botafogo' />
-                    <SelectComponent className='w-[140px]' label='Nº de quartos' value='100000000000000' />
+        <div className='min-h-screen w-screen flex flex-col items-center'>
+            <div className='w-screen flex justify-between px-14 lg:px-[106px] mt-16'>
+                <div className='flex gap-4 md:gap-8 lg:12'>
+                    <SelectComponent label='Bairro' values={filterItems.districtValuesUnique} />
+                    <SelectComponent className='w-[140px]' label='Nº de quartos' values={filterItems.bedroomsValuesUnique} />
                 </div>
-                <SelectComponent value='Mais recentes' defaultV='Mais recentes' />
+                <SelectComponent values={''} defaultV='Mais recentes' />
             </div>
             <div className='w-screen grid grid-cols-1 justify-items-center content-start md:grid-cols-3 gap-8 md:gap-[62px] mt-8 px-14 lg:px-[106px] mb-10'>
                 {apartaments && apartaments.length > 0 && apartaments.slice(0, 6).map(apartament => {
                     return (
-                        <div>
+                        <div className='w-full'>
                             <AptCard key={apartament.id}
                                 img={apartament.image}
                                 name={apartament.name}
@@ -56,7 +72,7 @@ function Busca() {
                             />
                             
                             <BasicModal
-                                
+                                key={id}
                                 img={apartament.image}
                                 name={apartament.name}
                                 street={apartament.address.street}
