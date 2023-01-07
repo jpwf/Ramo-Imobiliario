@@ -25,6 +25,7 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     }
     return next();
 }, apartmentController.create);
+
 router.get('/search', (req, res, next) => {
     const schema = Joi.object({
         numberOfBedrooms: Joi.number().min(1).max(20),
@@ -41,6 +42,7 @@ router.get('/search', (req, res, next) => {
 
     return next();
 }, apartmentController.getSome);
+
 router.get('/:id', apartmentController.show);
 
 export default router;
