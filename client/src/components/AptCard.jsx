@@ -25,6 +25,7 @@ import React from 'react';
 export default function AptCard(props) {
   return (
     <Card className='w-full min-w-min' >
+      
       <CardActionArea>
         <CardMedia
           component="img"
@@ -33,6 +34,7 @@ export default function AptCard(props) {
           image={props.img}
           alt="apartamento"
         />
+        
         <CardContent className='flex flex-col'>
           <Typography className='text-blue-500 mb-2' variant='subtitle2'>
             {props.name}
@@ -44,6 +46,7 @@ export default function AptCard(props) {
             <Chip className='bg-blue-900 text-sm lg:text-base ' label={props.numberOfBedrooms} color='primary' />
             <Chip className='bg-blue-900 text-sm lg:text-base ' label={props.price} color='primary' />
           </div>
+         
         </CardContent>
       </CardActionArea>
     </Card>

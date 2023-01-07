@@ -10,6 +10,9 @@ import BasicModal from '../components/Modal';
 
 
 function Busca() {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     const [apartaments, setApartaments] = useState([]);
     const id = useId();
 
@@ -60,18 +63,23 @@ function Busca() {
             <div className='w-screen grid grid-cols-1 justify-items-center content-start md:grid-cols-3 gap-8 md:gap-[62px] mt-8 px-14 lg:px-[106px] mb-10'>
                 {apartaments && apartaments.length > 0 && apartaments.slice(0, 6).map(apartament => {
                     return (
-                        <div className='w-full'>
+                        <div className='w-full' onClick={handleOpen} >
                             <AptCard key={apartament.id}
                                 img={apartament.image}
                                 name={apartament.name}
                                 street={apartament.address.street}
                                 numberOfBedrooms={apartament.numberOfBedrooms > 1 ? `${apartament.numberOfBedrooms} Quartos` : `${apartament.numberOfBedrooms} Quarto`}
                                 price={`R$${apartament.price}`}
+                                // onClick={}
+                                
+                                
                                 
                                 
                             />
                             
                             <BasicModal
+                                open={open}
+                                // close={handleClose}
                                 key={id}
                                 img={apartament.image}
                                 name={apartament.name}
