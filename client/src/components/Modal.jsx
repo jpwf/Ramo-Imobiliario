@@ -1,3 +1,8 @@
+/** 
+ * NÃO ESTÁ SENDO UTILIZADO NO MOMENTO!
+*/
+
+
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,9 +40,9 @@ export default function BasicModal(props) {
 
     return (
         <div>
-            {/* <button className='bg-blue-400 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded ' onClick={handleOpen}>Veja mais</button> */}
+            <button className='bg-blue-400 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded ' onClick={handleOpen}>Veja mais</button>
             <Modal
-                open={props.open}
+                open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
@@ -46,12 +51,12 @@ export default function BasicModal(props) {
                     <CardHeader
                         className='absolute w-full'
                         action={
-                            <X 
+                            <X
                                 className='hover:shadow-md hover:rounded-md'
-                                color='#4b5563' 
-                                cursor='pointer' 
-                                size={32} 
-                                onClick={handleClose} 
+                                color='#4b5563'
+                                cursor='pointer'
+                                size={32}
+                                onClick={handleClose}
                             />
                         }
                     />

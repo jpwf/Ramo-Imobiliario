@@ -5,7 +5,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SelectComponent({ label, values, defaultV }) {
+export default function SelectComponent(props) {
     const [item, setItem] = React.useState('');
     const handleChange = (event) => {
         setItem(event.target.value);
@@ -14,26 +14,30 @@ export default function SelectComponent({ label, values, defaultV }) {
     return (
         <>
             <FormControl sx={{ minWidth: 140 }} size='small'>
-                {label
-                    ? <InputLabel className='text-sm' id="demo-simple-select-helper-label">{label}</InputLabel>
+                {props.label
+                    ? <InputLabel className='text-sm' id="demo-simple-select-helper-label">{props.label}</InputLabel>
                     : ""
                 }
                 <Select
                     className='text-sm '
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label={label}
+                    label={props.label}
                     value={item}
                     onChange={handleChange}
                     autoWidth
                     displayEmpty
                     
                 >
-                    {defaultV
-                        ? <MenuItem value="">{defaultV}</MenuItem>
-                        : ''
+                    {props.defaultV
+                        ? <MenuItem value="">{props.defaultV}</MenuItem>
+                        : null
                     }
-                    {values ? values.map((value, index) => (
+                    {props.districts ? props.districts.map((value, index) => (
+                        <MenuItem key={index} value={value}>{value}</MenuItem>
+                    )) : null
+                    }
+                    {props.bedrooms ? props.bedrooms.map((value, index) => (
                         <MenuItem key={index} value={value}>{value}</MenuItem>
                     )) : null
                     }

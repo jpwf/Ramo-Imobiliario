@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
@@ -7,10 +7,16 @@ import axios from 'axios';
 
 
 import LoginImage from '../assets/login-img.png'
-import { EnvelopeSimple, Password, EyeSlash } from 'phosphor-react'
+import { EnvelopeSimple, Password, EyeSlash, Eye } from 'phosphor-react'
 
 function LoginPage() {
   const navigate = useNavigate();
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const schema = Yup.object().shape({
     email: Yup.string().email("E-mail inválido").required(),
@@ -23,21 +29,21 @@ function LoginPage() {
 
   async function logarUsuario(data) {
     await axios.post('/user/login', data)
-    .then(res => {
-      localStorage.setItem('usuario', JSON.stringify(res.data.name));
-      localStorage.setItem('token', JSON.stringify(res.data.token));
-      navigate('/');
-    })
-    .catch(error => {
-     console.error(error);
-    })
- }
+      .then(res => {
+        localStorage.setItem('usuario', JSON.stringify(res.data.name));
+        localStorage.setItem('token', JSON.stringify(res.data.token));
+        navigate('/');
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
 
   const submitForm = async (e) => {
     const user = data;
     logarUsuario(user);
     reset();
-    
+
   }
 
   return (
@@ -45,7 +51,7 @@ function LoginPage() {
     <div className=" bg-white h-screen flex flex-col min-h-screen items-center">
       <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
         <img
-          className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
+          className='lg:flex md:hidden sm:hidden w-full max-w-sm max-h-[425px]'
           src={LoginImage} alt="boneco segurando cartão identificador"
         />
 
@@ -76,20 +82,24 @@ function LoginPage() {
               <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="password">
                 Senha
               </label>
-              <div className='flex shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
+              <div className='flex items shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
                 <Password size={18} className="text-gray-400" />
                 <input
                   className="w-full outline-0"
-                  id="password" type="password" placeholder="Digite sua senha" autoComplete='on'
+                  id="password" type={passwordShown ? "text" : "password"} placeholder="Digite sua senha" autoComplete='on'
                   {...register('password')} required
                 />
+                {passwordShown
+                  ? <EyeSlash size={18} weight="duotone" onClick={togglePassword} className="text-gray-400" />
+                  : <Eye size={18} weight="duotone" onClick={togglePassword} className="text-gray-400" />
+                }
               </div>
               <p className="text-red-600 text-xs">{errors.password?.message}</p>
 
             </div>
             <div className='flex items-center mb-8'>
-              <input id='rememberMe' type="checkbox" value='' className='form-checkbox mr-2 w-4 h-4 border border-gray-400 rounded text-blue-400 focus:ring-blue-300 transition duration-200 cursor-pointer'></input>
-              <label htmlFor="rememberMe" className='text-sm font-medium text-gray-700 cursor-pointer'> Lembre-se de mim</label>
+              <input id='showPassword' type="checkbox" onChange={togglePassword} value='' className='form-checkbox mr-2 w-4 h-4 border border-gray-400 rounded text-blue-400 focus:ring-blue-300 transition duration-200 cursor-pointer'></input>
+              <label htmlFor="showPassword" className='text-sm font-medium text-gray-700 cursor-pointer'> Mostrar Senha</label>
             </div>
             <button
               className="w-full mb-6 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none"
