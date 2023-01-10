@@ -45,7 +45,14 @@ export default class ApartmentController {
             });
             res.status(201).json(apartment);
         } catch (error) {
+            if (error.code === 11000)
+                return res.status(400).json({ message: keyError(error.keyValue) });
             res.status(500).json({ message: error.message });
+        }
+
+        function keyError(key) {
+            if (key.address) return 'Apartment already registered';
+            return 'Please check your request body or contact the administrator';
         }
     }
 }
