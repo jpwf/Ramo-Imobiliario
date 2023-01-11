@@ -37,7 +37,7 @@ router.post('/publish', authMiddleware, (req, res, next) => {
 }, apartmentController.create);
 
 
-router.post('/upload/:id', upload.single('image'), (req, res, next) =>{
+router.post('/upload', upload.single('image'), (req, res, next) =>{
     if (req.file){
         console.log(req.file)
         return res.json(req.file.filename)
