@@ -2,8 +2,18 @@ import { Router } from 'express';
 import Joi from 'joi';
 import authMiddleware from '../middlewares/authMiddleware.js';
 import apartmentController from '../controllers/apartmentController.js';
+import multer from 'multer';
+import { storage, fileFilter } from '../middlewares/multerConfig.js';
 
 const router = Router();
+
+const upload = multer({ 
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 
 router.post('/publish', authMiddleware, (req, res, next) => {
     const schema = Joi.object({
@@ -14,7 +24,7 @@ router.post('/publish', authMiddleware, (req, res, next) => {
             district: Joi.string().min(3).max(20).required(),
             complement: Joi.string().max(100),
         }),
-        image: Joi.string().default('\0'),
+        image: Joi.string(),
         price: Joi.number().min(1).max(300000000).required(),
         description: Joi.string().min(3).max(1000).required()
     });
@@ -25,6 +35,16 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     }
     return next();
 }, apartmentController.create);
+
+
+router.post('/upload/:id', upload.single('image'), (req, res, next) =>{
+    if (req.file){
+        console.log(req.file)
+        return res.json(req.file.filename)
+    }
+
+    return res.status(400).json({error: 'Por favor, insira um formato de imagem válido!'})
+})
 
 router.get('/search', (req, res, next) => {
     const schema = Joi.object({
