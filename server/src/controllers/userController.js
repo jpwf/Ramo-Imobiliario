@@ -1,4 +1,6 @@
 import UserModel from '../models/User.js';
+import ApartmentModel from '../models/Apartment.js';
+
 
 export default class UserController {
     static async store(req, res) {
@@ -16,6 +18,14 @@ export default class UserController {
             if (key.email) return 'Email already registered';
             if (key.cpf) return 'CPF already registered';
             return 'Please check your request body or contact the administrator';
+        }
+    }
+    static async show(req, res) {
+        try {
+            const user = await UserModel.findById(req.params.id);
+            res.status(200).json(user.name);
+        } catch (error) {
+            res.status(404).json({ message: 'User not found'});
         }
     }
 }

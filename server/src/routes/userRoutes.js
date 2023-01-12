@@ -42,5 +42,8 @@ router.post('/login', (req, res, next) => {
     return next();
 }, authController.login);
 
+
+router.get('/:id', userController.show);
+
 export default router;
 
