@@ -26,8 +26,11 @@ export const fileFilter = (req, file, callback) => {
     }
 };
 
-export const registerAuth = (req, res, next) => {
-    if (req.userInfo.id !== ApartmentModel.userId){
+export const uploadAuth = async (req, res, next) => {
+
+    const apartment = await ApartmentModel.findById(req.params.id);
+
+    if (req.userInfo.id !== apartment.userId){
         return res.status(401).json({ error: 'Invalid operation' });
     }
 }
