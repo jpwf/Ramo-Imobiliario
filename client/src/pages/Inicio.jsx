@@ -4,8 +4,8 @@ import SelectComponent from '../components/SelectComponent';
 
 function Inicio() {
     return(
-        <div>
-            <div className=' bg-home  bg-cover w-full h-full'>
+        
+            <div className=' bg-home  bg-cover h-screen'>
                 <div className='text-3xl font-bold text-white pt-56 ml-24 '>
                     <p>Encontre um lar na</p>
                     <p>cidade do </p>
@@ -20,8 +20,8 @@ function Inicio() {
                         
                         <SelectComponent label='Rio de Janeiro' className='w-[57px] h-[36px]'/>
                     </div>
-                    <div className='flex flex-col mt-5 mx-12 gap-1 items-center'>
-                        <div className='flex items-center mb-[10px] '>
+                    <div className='flex flex-col mt-5 px-12  items-center'>
+                        <div className='flex items-center gap-1 mb-[10px] '>
                             <NavigationArrow size={16}  color="#050505" />
                             Bairro
                         </div>
@@ -61,7 +61,7 @@ function Inicio() {
                 
             </footer>
         </div>
-        </div>
+        
     )
 }
 
