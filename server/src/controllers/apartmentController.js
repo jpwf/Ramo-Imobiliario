@@ -12,8 +12,6 @@ export default class ApartmentController {
         if (sortBy === 'expensive')
             value = -1
 
-        console.log(value)
-        
         try {
             const apartments = await ApartmentModel.find(buildQuery(req.query), {'address._id': 0, '__v': 0})
                 .limit(limit)
