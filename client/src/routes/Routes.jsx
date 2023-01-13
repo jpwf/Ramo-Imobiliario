@@ -11,6 +11,7 @@ import ErrorPage from '../pages/Error'
 import Inicio from '../pages/Inicio'
 import LoginPage from '../pages/Login'
 import Register from '../pages/Register'
+import Anuncio from '../pages/Anuncio'
 
 
 export default function router() {
@@ -18,7 +19,7 @@ export default function router() {
         <Routes>
             <Route path='/' element={<Inicio />} />
             <Route path='/busca' element={<Busca />} />
-            <Route path='/criar-anuncio' element={<CriarAnuncio />} />
+            <Route path='/criar-anuncio' element={<Anuncio />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/cadastro' element={<Register />} />
             <Route path='*' element={<ErrorPage />} />
