@@ -1,6 +1,7 @@
 import { FILE } from "dns"
 import multer from "multer"
 import path from "path" 
+import ApartmentModel from '../models/Apartment.js'
 
 export const storage = multer.diskStorage({
 
@@ -10,9 +11,11 @@ export const storage = multer.diskStorage({
     filename: (req, file, callback) => {
         const time = new Date().getTime()
 
-        const extensaoArquivo = file.originalname.split('.')[1];
+        const extensaoArquivo = file.originalname.split('.');
 
-        callback(null, `${time}.${extensaoArquivo}`)
+        const tamanho = extensaoArquivo.length
+
+        callback(null, `${time}.${extensaoArquivo[tamanho - 1]}`)
     },
 })
 
@@ -23,14 +26,21 @@ export const fileFilter = (req, file, callback) => {
     }
     else{
         callback(null, false)
+        return callback(new Error("Ivalid file Type"))
     }
 };
 
-export const uploadAuth = async (req, res, next) => {
+export const uploadAuth = async (req, res, callback) => {
 
     const apartment = await ApartmentModel.findById(req.params.id);
 
-    if (req.userInfo.id !== apartment.userId){
+    if(!apartment){
         return res.status(401).json({ error: 'Invalid operation' });
     }
+
+    if (req.userInfo.id != apartment.userId){
+        return res.status(401).json({ error: 'Invalid operation' });
+    }
+
+    callback(null, true)
 }

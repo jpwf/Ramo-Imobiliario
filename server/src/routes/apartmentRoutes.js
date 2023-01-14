@@ -9,13 +9,12 @@ import { storage, fileFilter, uploadAuth } from '../middlewares/multerConfig.js'
 const router = Router();
 
 const upload = multer({ 
-    uploadAuth: uploadAuth,
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 5
+        fileSize: 1024 * 1024 * 3.5
     },
     fileFilter: fileFilter
-});
+}).single('image');
 
 router.post('/publish', authMiddleware, (req, res, next) => {
     const schema = Joi.object({
@@ -38,16 +37,17 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     return next();
 }, apartmentController.create);
 
-
-router.post('/upload/:id', upload.single('image'), (req, res, next) =>{
-
-    if (req.file){
-        console.log(req.file)
-        return res.status(200).json({messege: 'Successfully uploaded'})
-        //return res.json(req.file.filename)
-    }
-
-    return res.status(406).json({error: 'Uploaded file is not a valid image'})
+router.post('/upload/:id', authMiddleware, uploadAuth, (req, res) => {
+    upload(req, res, function(err) {
+        if (err instanceof multer.MulterError){
+            return res.status(406).json({ error: err.message })
+        }
+        else if (err){
+            return res.status(406).json({ error: err.message })
+        }
+        
+        return res.status(200).json({message: 'Successfully uploaded'})
+    })
 })
 
 router.get('/search', (req, res, next) => {
