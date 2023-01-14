@@ -11,7 +11,7 @@ function Navbar() {
   const activeStyle = "underline underline-offset-4";
 
   return (
-    <nav className=' w-full text-base border-b-[1px] border-b-gray-300'>
+    <nav className=' w-full text-base border-b-[1px] bg-white border-b-gray-300'>
       <div className="flex justify-between h-20 items-center">
         <Link to={"/"} aria-label='inicio' className='flex items-center py-5 md:ml-9 lg:ml-20 md:py-2'>
           <img className='min-w-[140px] min-h-full' src={logo} alt="Logo Ramo Imobiliário" />

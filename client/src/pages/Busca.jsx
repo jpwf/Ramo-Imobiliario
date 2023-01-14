@@ -3,6 +3,7 @@ import axios from 'axios'
 import AptCard from '../components/AptCard.jsx';
 import SelectComponent from '../components/SelectComponent';
 import PaginationLink from '../utils/Pagination';
+import navBar from '../components/navBar'
 
 function Busca() {
     const [apartaments, setApartaments] = useState([]);
@@ -40,7 +41,9 @@ function Busca() {
     }, [])
 
     return (
+        
         <div className='min-h-screen max-w-none flex flex-col items-center'>
+            <navBar/>
             <div className='w-full flex justify-between px-14 lg:px-[106px] mt-16'>
                 <div className='flex gap-4 md:gap-8 lg:12'>
                     <SelectComponent label='Bairro' districts={filterItems.districtValuesUnique} />

@@ -46,7 +46,7 @@ function App() {
           draggable
           pauseOnHover
         />
-        <Navbar />
+        
         <Routes />
       </ThemeProvider>
     </Router>
