@@ -6,7 +6,7 @@ import ApartmentModel from '../models/Apartment.js'
 export const storage = multer.diskStorage({
 
     destination: (req, file, callback) => {
-        callback(null, path.resolve('public'))
+        callback(null, path.resolve('public/images'))
     },
     filename: (req, file, callback) => {
         const time = new Date().getTime()
@@ -26,7 +26,7 @@ export const fileFilter = (req, file, callback) => {
     }
     else{
         callback(null, false)
-        return callback(new Error("Ivalid file Type"))
+        return callback(new Error('Ivalid file Type'))
     }
 };
 

@@ -14,6 +14,7 @@ export default class ApartmentController {
 
         try {
             const apartments = await ApartmentModel.find(buildQuery(req.query), {'address._id': 0, '__v': 0})
+                .populate('userId', 'name')
                 .limit(limit)
                 .skip((page - 1) * limit)
                 .sort(sortBy === 'cheaper' || sortBy === 'expensive' ? {price: value} : {_id: -1})
