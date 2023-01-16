@@ -22,7 +22,7 @@ function App() {
         draggable
         pauseOnHover
     />
-      <Navbar />
+      
       <Routes/>
     </Router>
   )
