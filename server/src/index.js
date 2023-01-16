@@ -18,5 +18,6 @@ app.mongo = new MongoDB();
 
 app.use('/user', userRoutes);
 app.use('/apartment', apartmentRoutes);
+app.use('/images', express.static('public/images'))
 
 app.listen(process.env.port);
