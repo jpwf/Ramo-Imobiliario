@@ -4,9 +4,9 @@ import SelectComponent from '../components/SelectComponent';
 import Navbar from '../components/navBar'
 function Inicio() {
     return(
-            <div>
+            <div  className='h-screen'>
                 <Navbar/>
-                <div className='  bg-home  bg-cover  h-screen'>
+                <div className='  bg-home  bg-cover  '>
                     
                     <div className='text-3xl font-bold text-white    items-center text-justify pt-56 ml-24 '>
                         <p>Encontre um lar na</p> 
