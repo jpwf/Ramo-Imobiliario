@@ -25,11 +25,12 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     }
     return next();
 }, apartmentController.create);
+
 router.get('/search', (req, res, next) => {
     const schema = Joi.object({
         numberOfBedrooms: Joi.number().min(1).max(20),
         district: Joi.string().min(3).max(20).required(),
-        sortBy: Joi.string().valid('newer', 'publication_order').default('publication_order'),
+        sortBy: Joi.string().valid('newer', 'cheaper', 'expensive').default('newer'),
         page: Joi.number().min(1).default(1),
         limit: Joi.number().min(1).max(100).default(20)
     });
@@ -41,6 +42,7 @@ router.get('/search', (req, res, next) => {
 
     return next();
 }, apartmentController.getSome);
+
 router.get('/:id', apartmentController.show);
 
 export default router;
