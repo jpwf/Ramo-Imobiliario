@@ -13,6 +13,7 @@ module.exports = {
       backgroundImage: {
         login: "url('/login-img.png')" ,
         register: "url('/register-img.png')",
+        home: "url('src/assets/home-img.png')"
       }
     },
   },

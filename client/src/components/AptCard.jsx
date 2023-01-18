@@ -31,9 +31,10 @@ const AptCard = ({ img, owner, street, numberOfBedrooms, price, description}) =>
 
   return (
     <>
-      <Card className='w-full min-w-[221px]'>
+      <Card className='w-full min-w-[221px] max-h-80'>
         <CardActionArea onClick={handleOpen} >
           <CardMedia
+            className='max-h-[138px] md lg:max-h-[200px]'
             component="img"
             height="200"
             width="368"
@@ -79,6 +80,7 @@ const AptCard = ({ img, owner, street, numberOfBedrooms, price, description}) =>
             }
           />
           <CardMedia
+            className='max-h-56'
             component="img"
             height="200"
             width="440"
