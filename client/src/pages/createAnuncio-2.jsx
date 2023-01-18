@@ -1,8 +1,8 @@
 import React from 'react';
 import Navbar from '../components/navBar'
 import AnuncioStepper from '../components/Stepper'
-  import {Slider, Box} from '@material-ui/core'
-  import anuncio from '../assets/anuncio.png'
+import {Slider, Box} from '@material-ui/core'
+import anuncio from '../assets/anuncio.png'
 
 function CreateAnuncio2(){
   return(
@@ -34,7 +34,7 @@ function CreateAnuncio2(){
           <AnuncioStepper/>
         </div>
       
-        <img src={anuncio} className='max-w-[416px] max-h-[314px] pr-[122px]' />
+        <img src={anuncio} className='max-w-[416px] max-h-[314px] mt-[242px]' />
       </div>
    
  
