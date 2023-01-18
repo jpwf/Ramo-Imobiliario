@@ -4,7 +4,7 @@ import SelectComponent from '../components/SelectComponent';
 import notificacao from '../utils/notificacao.js';
 import { Pagination, PaginationItem } from '@mui/material';
 import { ApartmentsService } from '../services/api/apartments/ApartmentsService.js';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/navBar.jsx';
 
 //Component to show the search results
@@ -17,7 +17,7 @@ function Busca() {
     const district = useMemo(() => searchParams.get('district') || 'Flamengo', [searchParams]);
     const page = useMemo(() => searchParams.get('page') || '1', [searchParams]);
     const numberOfBedrooms = useMemo(() => searchParams.get('numberOfBedrooms'), [searchParams]);
-    const sortBy = useMemo(() => searchParams.get('sortBy') || 'newer' , [searchParams]);
+    const sortBy = useMemo(() => searchParams.get('sortBy') || 'newer', [searchParams]);
 
     //function to handle the change in the select component
     const handleDistrictChange = (e) => {
@@ -36,7 +36,7 @@ function Busca() {
         } else if (value === 'Maior Preço') {
             setSearchParams({ ...searchParams, district, [name]: 'expensive' });
         } else {
-            setSearchParams({ ...searchParams, district, [name]: 'newer' });	
+            setSearchParams({ ...searchParams, district, [name]: 'newer' });
         }
     };
 
@@ -98,9 +98,27 @@ function Busca() {
                         </div>
                     )
                 })}
-            </div>
-        </div>
 
+            </div>
+
+            <Pagination
+                className='mb-16'
+                color='primary'
+                size='large'
+                shape='rounded'
+                defaultPage={1}
+                page={parseInt(page)}
+                count={3} //Math.ceil(apartments.length / 6)
+                onChange={(_, newPage) => setSearchParams({...searchParams, district, page: newPage}, { replace: true })}
+                // renderItem={(item) => (
+                //     <PaginationItem
+                //         component={Link}
+                //         to={`/busca${item.page === 1 ? '' : `?page=${item.page}`}`}
+                //         {...item}
+                //     />
+                // )}
+            />
+        </div>
     )
 }
 
