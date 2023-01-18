@@ -1,22 +1,20 @@
 import express from 'express';
 import morgan from 'morgan';
-import cors from 'cors';
-import helmet from 'helmet';
 import MongoDB from './database/MongoDB.js';
+import cors from 'cors'
 
 import userRoutes from './routes/userRoutes.js';
-import apartmentRoutes from './routes/apartmentRoutes.js';
 
 const app = express();
 
-app.use(cors());
-app.use(helmet());
+app.use(cors())
 
 app.use(process.env.enviroment === 'development' ? morgan('dev') : morgan('combined'));
 app.use(express.json());
-app.mongo = new MongoDB();
+app.mongoose = new MongoDB();
 
 app.use('/user', userRoutes);
-app.use('/apartment', apartmentRoutes);
+app.use('/login', userRoutes);
+
 
 app.listen(process.env.port);
