@@ -7,6 +7,8 @@ import axios from 'axios';
 
 import notificacao from '../utils/notificacao';
 import { Eye, EyeSlash } from 'phosphor-react';
+import { RegisterService } from '../services/api/register/RegisterService';
+import Navbar from '../components/navBar';
 
 Yup.setLocale({
     mixed: {
@@ -33,32 +35,29 @@ function Register() {
         setPasswordShown(!passwordShown);
     };
 
-    async function cadastrarUsuario(data) {
-
-        await axios.post('/user/register', data)
-            .then(() => {
-                notificacao(true, "Usuário cadastrado!");
-                setTimeout(() => navigate('/login'), 3000);
-            }
-            )
-    }
-
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const submitForm = (data) => {
-        const usuario = data;
+    const submitForm = async (data) => {
         try {
-            cadastrarUsuario(usuario);
+            //remove confirmPassword from data
+            const { confirmPassword, ...user } = data;
+            console.log(user);
+            const response = await RegisterService.register(user);
+            //if response is true, navigate to login page
+            if (response) {
+                setTimeout(() => navigate('/login'), 3000);
+                reset();
+            }
         } catch (error) {
             console.error(error);
         }
-        reset();
     }
 
     return (
         <div className="bg-white h-screen flex flex-col min-h-screen items-center">
+            <Navbar />
             <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
                 <img
                     className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
@@ -122,7 +121,7 @@ function Register() {
                             <div className='flex items shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
                                 <input
                                     className="w-full outline-0"
-                                    id="password" type={passwordShown ? "text" : "password"} placeholder="Digite sua senha"
+                                    id="password" type={passwordShown ? "text" : "password"} placeholder="Digite sua senha" autoComplete='off'
                                     {...register('password')} 
                                 />
                                 {passwordShown

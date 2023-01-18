@@ -8,6 +8,8 @@ import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css"
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AuthProvider } from './contexts/AuthContext';
+import LoginPage from './pages/Login';
 
 
 const theme = createTheme({
@@ -32,24 +34,27 @@ const theme = createTheme({
 function App() {
 
   return (
-
-    <Router>
+    <AuthProvider>
       <ThemeProvider theme={theme}>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <Navbar />
-        <Routes />
+          <Router>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={3000}
+              limit={1}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            {/* <Navbar> */}
+              <Routes />
+            {/* </Navbar> */}
+          </Router>
       </ThemeProvider>
-    </Router>
+    </AuthProvider>
   )
 }
 

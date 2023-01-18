@@ -2,16 +2,14 @@ import {
     Route,
     Routes,
 } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 
-import App from '../App'
-import BasicModal from '../components/Modal'
 import Busca from '../pages/Busca'
 import CriarAnuncio from '../pages/CriarAnuncio'
-import ErrorPage from '../pages/Error'
 import Inicio from '../pages/Inicio'
 import LoginPage from '../pages/Login'
 import Register from '../pages/Register'
+import NotFound from '../pages/NotFound'
+import { RequireAuth } from '../contexts/RequireAuth'
 
 
 
@@ -20,13 +18,13 @@ export default function router() {
     return (
         <Routes>
             <Route path='/' element={<Inicio />} />
-            <Route path='/busca' element={<Busca />} >
-                <Route path='/busca/:modalId' element={<BasicModal />}/>
+            <Route path='/apartment/search?' element={<Busca />} >
+               
             </Route>  
-            <Route path='/criar-anuncio' element={<CriarAnuncio />} />
+            <Route path='/criar-anuncio' element={<RequireAuth><CriarAnuncio /></RequireAuth> } />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/cadastro' element={<Register />} />
-            <Route path='*' element={<ErrorPage />} />
+            <Route path='*' element={<NotFound />} />
         </Routes>
     );
 }
