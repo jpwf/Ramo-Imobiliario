@@ -24,11 +24,11 @@ const fileFilter = (req, file, callback) => {
     }
 };
 
-
-export default multer({ 
+export const upload = multer({ 
     storage,
     limits: {
         fileSize: 1024 * 1024 * 3.5
     },
     fileFilter
 }).single('image');
+

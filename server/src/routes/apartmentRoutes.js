@@ -7,7 +7,9 @@ import uploadMiddleware from '../middlewares/uploadMiddleware.js';
 import apartmentController from '../controllers/apartmentController.js';
 import fileController from '../controllers/fileController.js';
 
-import multer from '../config/multer.js';
+import multer from 'multer'
+import { upload } from '../config/multer.js';
+
 
 const router = Router();
 
@@ -32,8 +34,16 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     return next();
 }, apartmentController.create);
 
-router.post('/upload/:id', authMiddleware, uploadMiddleware, (req, res) => {
-    multer(req, res, fileController.checkUpload(err));
+router.post('/upload/:id', authMiddleware, uploadMiddleware, (req, res, next) => {
+    upload(req, res, function(err){
+        if (err instanceof multer.MulterError){
+            return res.status(406).json({ error: err.message })
+        }
+        else if (err){
+            return res.status(406).json({ error: err.message })
+        }
+        return next()
+    })
 }, fileController.create);
 
 router.get('/search', (req, res, next) => {

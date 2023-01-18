@@ -1,7 +1,7 @@
 import ApartmentModel from '../models/Apartment.js'
 
-export default async function create(req, res) { 
-    await ApartmentModel.findById(req.params.id);
+export default async function create(req, res, callback) { 
+    const apartment = await ApartmentModel.findById(req.params.id);
 
     if(!apartment){
         return res.status(401).json({ error: 'Invalid operation' });
@@ -10,4 +10,6 @@ export default async function create(req, res) {
     if (req.userInfo.id != apartment.userId){
         return res.status(401).json({ error: 'Invalid operation' });
     }
+
+    callback(null, true)
 }
