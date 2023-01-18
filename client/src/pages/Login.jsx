@@ -3,14 +3,18 @@ import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-
+import { useAuthContext } from '../contexts/AuthContext';
 import LoginImage from '../assets/login-img.png'
+
 import { EnvelopeSimple, Password, EyeSlash, Eye } from 'phosphor-react'
+import notificacao from '../utils/notificacao';
+import Navbar from '../components/navBar';
 
 function LoginPage() {
   const navigate = useNavigate();
+
+  const { login } = useAuthContext();
 
   const [passwordShown, setPasswordShown] = useState(false);
 
@@ -27,28 +31,26 @@ function LoginPage() {
     resolver: yupResolver(schema),
   });
 
-  async function logarUsuario(data) {
-    await axios.post('/user/login', data)
-      .then(res => {
-        localStorage.setItem('usuario', JSON.stringify(res.data.name));
-        localStorage.setItem('token', JSON.stringify(res.data.token));
-        navigate('/');
-      })
-      .catch(error => {
-        console.error(error);
-      })
-  }
-
-  const submitForm = async (e) => {
-    const user = data;
-    logarUsuario(user);
-    reset();
-
+  const submitForm = async (data) => {
+    try {
+      await login(data.email, data.password)
+      //Using react router dom navigate to previous page or home if there is no previous page or the previous page is the register page
+      if (navigate.length >= 2 && navigate.arguments !== '/cadastro') {
+        navigate(-1, { replace: true })
+      } else {
+        navigate('/', { replace: true })
+      }
+    } catch (error) {
+      console.log(error.message)
+    } finally {
+      reset();
+    }
   }
 
   return (
 
     <div className=" bg-white h-screen flex flex-col min-h-screen items-center">
+      <Navbar />
       <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
         <img
           className='lg:flex md:hidden sm:hidden w-full max-w-sm max-h-[425px]'
@@ -109,13 +111,12 @@ function LoginPage() {
             </button>
 
             <p className="text-base text-center text-gray-500">
-              Não possui uma conta? <Link to={"/cadastro"} className='text-gray-900 font-semibold'>Cadastre-se</Link>
+              Não possui uma conta? <Link to={'/cadastro'} className='text-gray-900 font-semibold'>Cadastre-se</Link>
             </p>
           </form>
         </div>
       </div>
     </div>
-
   )
 }
 

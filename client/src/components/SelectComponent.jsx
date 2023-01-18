@@ -5,39 +5,48 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+// Component to create a MaterialUI select component with the values passed as props
 export default function SelectComponent(props) {
-    const [item, setItem] = React.useState('');
-    const handleChange = (event) => {
-        setItem(event.target.value);
-    };
-
+    const bedroomsValues = [1, 2, 3, 4, 5];
+    const districtNames = ["Grajaú", "Méier", "Tijuca", "Sepetiba", "Copacabana", "Urca", "Leme", "Coelho Neto", "Flamengo"];
+    bedroomsValues.sort();
+    districtNames.sort();
+    
     return (
         <>
+            {/* // MaterialUI select component */}
             <FormControl sx={{ minWidth: 140 }} size='small'>
                 {props.label
-                    ? <InputLabel className='text-sm' id="demo-simple-select-helper-label">{props.label}</InputLabel>
+                    ? <InputLabel className='text-sm' id={`${props.label}-select-label`}>{props.label}</InputLabel>
                     : ""
                 }
                 <Select
                     className='text-sm '
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
+                    labelId={`${props.label}-select-label`}
+                    id={`${props.label}-select`}
                     label={props.label}
-                    value={item}
-                    onChange={handleChange}
+                    value={props.selectedValue || ''}
+                    onChange={props.onChange}
                     autoWidth
+                    name={props.name}
                     displayEmpty
                     
-                >
-                    {props.defaultV
-                        ? <MenuItem value="">{props.defaultV}</MenuItem>
-                        : null
+                >   
+                    {/* //if there is a defaultV passed as props, it will be shown as the options */}
+                    {props.defaultV ? 
+                        <MenuItem disabled value=''><em>{props.defaultV}</em></MenuItem>
+                     : null
                     }
-                    {props.districts ? props.districts.map((value, index) => (
+                    {/* if there is a value passed as props, it will be shown as the options */}
+                    {props.values ? props.values.map((value, index) => (
                         <MenuItem key={index} value={value}>{value}</MenuItem>
                     )) : null
                     }
-                    {props.bedrooms ? props.bedrooms.map((value, index) => (
+                    {props.districts ? districtNames.map((value, index) => (
+                        <MenuItem key={index} value={value}>{value}</MenuItem>
+                    )) : null
+                    }
+                    {props.bedrooms ? bedroomsValues.map((value, index) => (
                         <MenuItem key={index} value={value}>{value}</MenuItem>
                     )) : null
                     }
