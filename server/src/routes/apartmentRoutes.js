@@ -1,19 +1,15 @@
 import { Router } from 'express';
 import Joi from 'joi';
+
 import authMiddleware from '../middlewares/authMiddleware.js';
+import uploadMiddleware from '../middlewares/uploadMiddleware.js';
+
 import apartmentController from '../controllers/apartmentController.js';
-import multer, { MulterError } from 'multer';
-import { storage, fileFilter, uploadAuth } from '../middlewares/multerConfig.js';
+import fileController from '../controllers/fileController.js';
+
+import multer from '../config/multer.js';
 
 const router = Router();
-
-const upload = multer({ 
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 3.5
-    },
-    fileFilter: fileFilter
-}).single('image');
 
 router.post('/publish', authMiddleware, (req, res, next) => {
     const schema = Joi.object({
@@ -36,18 +32,9 @@ router.post('/publish', authMiddleware, (req, res, next) => {
     return next();
 }, apartmentController.create);
 
-router.post('/upload/:id', authMiddleware, uploadAuth, (req, res) => {
-    upload(req, res, function(err){
-        if (err instanceof multer.MulterError){
-            return res.status(406).json({ error: err.message })
-        }
-        else if (err){
-            return res.status(406).json({ error: err.message })
-        }
-        
-        return res.status(200).json({message: 'Successfully uploaded'})
-    })
-})
+router.post('/upload/:id', authMiddleware, uploadMiddleware, (req, res) => {
+    multer(req, res, fileController.checkUpload(err));
+}, fileController.create);
 
 router.get('/search', (req, res, next) => {
     const schema = Joi.object({
