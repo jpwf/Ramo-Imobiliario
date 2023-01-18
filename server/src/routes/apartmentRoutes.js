@@ -60,6 +60,7 @@ router.get('/search', (req, res, next) => {
         return res.status(400).json({ message: error.details[0].message });
     }
 
+    req.query = schema.validate(req.query).value;
     return next();
 }, apartmentController.getSome);
 
