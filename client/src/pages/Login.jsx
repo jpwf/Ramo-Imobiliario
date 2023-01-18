@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-
+import { useAuthContext } from '../contexts/AuthContext';
 import LoginImage from '../assets/login-img.png'
-import { EnvelopeSimple, Password, EyeSlash } from 'phosphor-react'
+
+import { EnvelopeSimple, Password, EyeSlash, Eye } from 'phosphor-react'
+import notificacao from '../utils/notificacao';
+import Navbar from '../components/navBar';
 
 function LoginPage() {
   const navigate = useNavigate();
+
+  const { login } = useAuthContext();
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const schema = Yup.object().shape({
     email: Yup.string().email("E-mail inválido").required(),
@@ -21,31 +31,29 @@ function LoginPage() {
     resolver: yupResolver(schema),
   });
 
-  async function logarUsuario(data) {
-    await axios.post('/user/login', data)
-    .then(res => {
-      localStorage.setItem('usuario', JSON.stringify(res.data.name));
-      localStorage.setItem('token', JSON.stringify(res.data.token));
-      navigate('/');
-    })
-    .catch(error => {
-     console.error(error);
-    })
- }
-
-  const submitForm = async (e) => {
-    const user = data;
-    logarUsuario(user);
-    reset();
-    
+  const submitForm = async (data) => {
+    try {
+      await login(data.email, data.password)
+      //Using react router dom navigate to previous page or home if there is no previous page or the previous page is the register page
+      if (navigate.length >= 2 && navigate.arguments !== '/cadastro') {
+        navigate(-1, { replace: true })
+      } else {
+        navigate('/', { replace: true })
+      }
+    } catch (error) {
+      console.log(error.message)
+    } finally {
+      reset();
+    }
   }
 
   return (
 
     <div className=" bg-white h-screen flex flex-col min-h-screen items-center">
+      <Navbar />
       <div className='flex gap-28 justify-evenly items-center mt-24 w-4/5'>
         <img
-          className='lg:flex md:hidden sm:hidden w-full max-w-md max-h-[425px]'
+          className='lg:flex md:hidden sm:hidden w-full max-w-sm max-h-[425px]'
           src={LoginImage} alt="boneco segurando cartão identificador"
         />
 
@@ -76,20 +84,24 @@ function LoginPage() {
               <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="password">
                 Senha
               </label>
-              <div className='flex shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
+              <div className='flex items shadow appearance-none border rounded w-full py-3 px-4 gap-3 text-sm text-gray-700 leading-tight focus:outline-none placeholder-gray-400 focus:ring-1 focus:ring-blue-400'>
                 <Password size={18} className="text-gray-400" />
                 <input
                   className="w-full outline-0"
-                  id="password" type="password" placeholder="Digite sua senha" autoComplete='on'
+                  id="password" type={passwordShown ? "text" : "password"} placeholder="Digite sua senha" autoComplete='on'
                   {...register('password')} required
                 />
+                {passwordShown
+                  ? <EyeSlash size={18} weight="duotone" onClick={togglePassword} className="text-gray-400" />
+                  : <Eye size={18} weight="duotone" onClick={togglePassword} className="text-gray-400" />
+                }
               </div>
               <p className="text-red-600 text-xs">{errors.password?.message}</p>
 
             </div>
             <div className='flex items-center mb-8'>
-              <input id='rememberMe' type="checkbox" value='' className='form-checkbox mr-2 w-4 h-4 border border-gray-400 rounded text-blue-400 focus:ring-blue-300 transition duration-200 cursor-pointer'></input>
-              <label htmlFor="rememberMe" className='text-sm font-medium text-gray-700 cursor-pointer'> Lembre-se de mim</label>
+              <input id='showPassword' type="checkbox" onChange={togglePassword} value='' className='form-checkbox mr-2 w-4 h-4 border border-gray-400 rounded text-blue-400 focus:ring-blue-300 transition duration-200 cursor-pointer'></input>
+              <label htmlFor="showPassword" className='text-sm font-medium text-gray-700 cursor-pointer'> Mostrar Senha</label>
             </div>
             <button
               className="w-full mb-6 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none"
@@ -99,13 +111,12 @@ function LoginPage() {
             </button>
 
             <p className="text-base text-center text-gray-500">
-              Não possui uma conta? <Link to={"/cadastro"} className='text-gray-900 font-semibold'>Cadastre-se</Link>
+              Não possui uma conta? <Link to={'/cadastro'} className='text-gray-900 font-semibold'>Cadastre-se</Link>
             </p>
           </form>
         </div>
       </div>
     </div>
-
   )
 }
 
