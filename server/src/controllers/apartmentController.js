@@ -4,20 +4,13 @@ import ApartmentModel from '../models/Apartment.js';
 export default class ApartmentController {
     static async getSome(req, res) {
         const { page, limit, sortBy } = req.query;
-        var value
-
-        if (sortBy === 'cheaper')
-            value = 1
-
-        if (sortBy === 'expensive')
-            value = -1
 
         try {
             const apartments = await ApartmentModel.find(buildQuery(req.query), {'address._id': 0, '__v': 0})
                 .populate('userId', 'name')
                 .limit(limit)
                 .skip((page - 1) * limit)
-                .sort(sortBy === 'cheaper' || sortBy === 'expensive' ? {price: value} : {_id: -1})
+                .sort(buildSort(sortBy));
             res.status(200).json(apartments);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -30,6 +23,16 @@ export default class ApartmentController {
                 ...(numberOfBedrooms && { numberOfBedrooms }),
                 'address.district': district
             }
+        }
+
+        function buildSort(sortString) {
+            const sortObjMap = {
+                newer: { _id: -1 },
+                cheaper: { price: 1 },
+                expensive: { price: -1 }
+            };
+
+            return sortObjMap[sortString];
         }
     }
     
