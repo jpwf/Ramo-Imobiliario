@@ -4,9 +4,8 @@ import ApartmentModel from '../models/Apartment.js'
 export default class FileController {
     static async create(req, res) { 
         const apartment = await ApartmentModel.findById(req.params.id);
-
-        const Path = 'http://localhost:3000/images/' + req.file.filename
-        apartment.image = Path;
+        
+        apartment.image = req.file.filename;
     
         await apartment.save();
 
