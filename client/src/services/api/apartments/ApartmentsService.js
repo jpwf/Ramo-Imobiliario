@@ -11,11 +11,11 @@ const getAll = async (props) => {
         urlRelativa = `/apartment/search?district=${props.district}&page=${props.page}&limit=${props.limit}&sortBy=${props.sortBy}&numberOfBedrooms=${props.numberOfBedrooms}`;
     }
     try {
-        const {data} = await get(createUrl(urlRelativa));
-        
+        const {data, headers} = await get(createUrl(urlRelativa));
         if (data) {
             return {
-                data
+                data,
+                totalCount: Number(headers['x-total-count']),
             };
         }
         

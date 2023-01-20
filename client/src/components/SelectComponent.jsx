@@ -7,11 +7,12 @@ import Select from '@mui/material/Select';
 
 // Component to create a MaterialUI select component with the values passed as props
 export default function SelectComponent(props) {
-    const bedroomsValues = [1, 2, 3, 4, 5];
+    const bedroomsValues = [{"name":'Sem filtro', "value": 0}, {"name":'1', "value": 1}, {"name":'2', "value": 2}, {"name":'3', "value": 3}, {"name":'4', "value": 4}, {"name":'5', "value": 5}];
     const districtNames = ["Grajaú", "Méier", "Tijuca", "Sepetiba", "Copacabana", "Urca", "Leme", "Coelho Neto", "Flamengo"];
-    bedroomsValues.sort();
     districtNames.sort();
-    
+
+    const orderValues = [{"name":"Mais Recentes", "value": "newer"}, {"name": "Menor Preço", "value": "cheaper"}, {"name": "Maior Preço", "value": "expensive"}]
+
     return (
         <>
             {/* // MaterialUI select component */}
@@ -38,8 +39,8 @@ export default function SelectComponent(props) {
                      : null
                     }
                     {/* if there is a value passed as props, it will be shown as the options */}
-                    {props.values ? props.values.map((value, index) => (
-                        <MenuItem key={index} value={value}>{value}</MenuItem>
+                    {props.values ? orderValues.map((value, index) => (
+                        <MenuItem key={index} value={value.value}>{value.name}</MenuItem>
                     )) : null
                     }
                     {props.districts ? districtNames.map((value, index) => (
@@ -47,7 +48,7 @@ export default function SelectComponent(props) {
                     )) : null
                     }
                     {props.bedrooms ? bedroomsValues.map((value, index) => (
-                        <MenuItem key={index} value={value}>{value}</MenuItem>
+                        <MenuItem key={index} value={value.value}>{value.name}</MenuItem>
                     )) : null
                     }
                 </Select>

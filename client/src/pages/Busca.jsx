@@ -2,42 +2,53 @@ import { useEffect, useState, useId, useMemo } from 'react';
 import AptCard from '../components/AptCard.jsx';
 import SelectComponent from '../components/SelectComponent';
 import notificacao from '../utils/notificacao.js';
-import { Pagination, PaginationItem } from '@mui/material';
+import { LinearProgress, Pagination } from '@mui/material';
 import { ApartmentsService } from '../services/api/apartments/ApartmentsService.js';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/navBar.jsx';
 
 //Component to show the search results
 function Busca() {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams({});
 
     const [apartments, setApartments] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
 
     //filters
     const district = useMemo(() => searchParams.get('district') || 'Flamengo', [searchParams]);
-    const page = useMemo(() => searchParams.get('page') || '1', [searchParams]);
+    const page = useMemo(() => searchParams.get('page') || '1' , [searchParams]);
     const numberOfBedrooms = useMemo(() => searchParams.get('numberOfBedrooms'), [searchParams]);
-    const sortBy = useMemo(() => searchParams.get('sortBy') || 'newer', [searchParams]);
+    const sortBy = useMemo(() => searchParams.get('sortBy'), [searchParams]);
 
     //function to handle the change in the select component
     const handleDistrictChange = (e) => {
         const { name, value } = e.target;
-        setSearchParams({ ...searchParams, [name]: value });
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set(name, value);
+        setSearchParams(newSearchParams);
     };
     //handle the change in the bedrooms select component and set de searchParams preserving the other values
     const handleBedroomsChange = (e) => {
         const { name, value } = e.target;
-        setSearchParams({ ...searchParams, district, [name]: value });
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set(name, value);
+        setSearchParams(newSearchParams);
     };
     const handleSortByChange = (e) => {
         const { name, value } = e.target;
-        if (value === 'Menor Preço') {
-            setSearchParams({ ...searchParams, district, [name]: 'cheaper' });
-        } else if (value === 'Maior Preço') {
-            setSearchParams({ ...searchParams, district, [name]: 'expensive' });
-        } else {
-            setSearchParams({ ...searchParams, district, [name]: 'newer' });
-        }
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set(name, value);
+        setSearchParams(newSearchParams);
+    };
+
+    //function to handle the change in the pagination component
+    const handlePaginationChange = (_, value) => {
+        // cria uma cópia do objeto searchParams
+        const newSearchParams = new URLSearchParams(searchParams);
+        // adiciona o novo valor de página à cópia
+        newSearchParams.set("page", value);
+        // atualiza o estado com a cópia
+        setSearchParams(newSearchParams);
     };
 
     //getting the data from the api 
@@ -47,6 +58,7 @@ function Busca() {
             const res = await ApartmentsService.getAll({ district, page, numberOfBedrooms, sortBy });
             // setting the apartments state with the data from the api
             setApartments(res.data);
+            setTotalCount(res.totalCount);
             // if there is no data, it will show a notification
             if (res.data.length === 0) {
                 notificacao(false, 'Não foram encontrados apartamentos com essas características');
@@ -54,13 +66,10 @@ function Busca() {
                 setTimeout(() => setSearchParams({ ...searchParams, district, page: 1 }), 3000);
             }
         } catch (err) {
-            notificacao('error', 'Erro ao buscar os apartamentos');
+            notificacao(false, 'Erro ao buscar os apartamentos');
             console.log(err);
         }
     };
-
-    // values to be used in the sortBy select component as filter
-    const orderValues = ["Mais Recentes", "Menor Preço", "Maior Preço"] //'newer', 'cheaper', 'expensive'
 
     // useEffect to get the data from the api
     useEffect(() => {
@@ -77,11 +86,12 @@ function Busca() {
                     <SelectComponent name='district' label='Bairro' districts selectedValue={district} onChange={handleDistrictChange} />
                     <SelectComponent name='numberOfBedrooms' label='Nº de quartos' bedrooms selectedValue={numberOfBedrooms} onChange={handleBedroomsChange} />
                 </div>
-                <SelectComponent name='sortBy' label='Ordenar' values={orderValues} selectedValue={sortBy} onChange={handleSortByChange} />
+                <SelectComponent name='sortBy' label='Ordenar' values selectedValue={sortBy} onChange={handleSortByChange} />
             </div>
+            {/* if there is no data, it will show a loading message */}
             <div className='w-full grid grid-cols-1 justify-items-center content-start md:grid-cols-3 gap-8 md:gap-[62px] mt-8 px-14 lg:px-[106px] mb-10'>
-                {/* mapping the apartments */}
                 {apartments && apartments.length > 0 && apartments.slice(0, 6).map((apartment, index) => {
+                    {console.log(apartment.image)}
                     return (
                         <div className='w-full' key={index}>
                             {/* passing the data to the card component */}
@@ -98,26 +108,20 @@ function Busca() {
                         </div>
                     )
                 })}
-
             </div>
-
-            <Pagination
-                className='mb-16'
-                color='primary'
-                size='large'
-                shape='rounded'
-                defaultPage={1}
-                page={parseInt(page)}
-                count={3} //Math.ceil(apartments.length / 6)
-                onChange={(_, newPage) => setSearchParams({...searchParams, district, page: newPage}, { replace: true })}
-                // renderItem={(item) => (
-                //     <PaginationItem
-                //         component={Link}
-                //         to={`/busca${item.page === 1 ? '' : `?page=${item.page}`}`}
-                //         {...item}
-                //     />
-                // )}
-            />
+            {(totalCount > 0 && totalCount > 6) && (
+                <Pagination
+                    className='mb-16'
+                    color='primary'
+                    size='large'
+                    shape='rounded'
+                    defaultPage={1}
+                    page={parseInt(page)}
+                    count={Math.ceil(totalCount/6)} //Math.ceil(apartments.length / 6)
+                    onChange={handlePaginationChange}
+                />
+            )}
+            
         </div>
     )
 }

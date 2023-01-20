@@ -8,7 +8,7 @@ import { useAuthContext } from '../contexts/AuthContext';
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 
 
-function Navbar({ children }) {
+function Navbar() {
   const navigate = useNavigate();
 
   const [navbar, setNavbar] = useState(false);
@@ -47,6 +47,7 @@ function Navbar({ children }) {
   }
 
   function stringAvatar(name) {
+    if(!name) return;
     return {
       sx: {
         bgcolor: stringToColor(name),

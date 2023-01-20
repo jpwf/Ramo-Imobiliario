@@ -9,8 +9,14 @@ import apartmentRoutes from './routes/apartmentRoutes.js';
 
 const app = express();
 
-app.use(cors());
-app.use(helmet());
+const corsOptions = {
+    exposedHeaders: 'x-total-count',
+};
+
+app.use(cors(corsOptions));
+
+
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 app.use(process.env.enviroment === 'development' ? morgan('dev') : morgan('combined'));
 app.use(express.json());
