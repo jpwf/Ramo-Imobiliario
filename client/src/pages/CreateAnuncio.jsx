@@ -42,7 +42,7 @@ function CriarAnuncio() {
                         </div>
                         
                    </div>
-                   <AnuncioStepper className='mb-[176px]' />
+                   <AnuncioStepper />
                 </div>
                 <img src={anuncio} className='max-w-[416px] max-h-[314px] pr-[122px]' />
             </div>

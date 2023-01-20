@@ -18,13 +18,13 @@ function CreateAnuncio3(){
               <input placeholder='R$ Digite o valor' className='mb-[32px] py-3 px-4 gap-3 items-center border rounded border-solid border-[#9CA3AF] '  />
             </label>
             
-            <div className='bg-blue-100 w-[544px] h-fit px-1 flex flex-col gap-1 items-start rounded mb-[27px] '>
+            <div className='bg-blue-100 w-full h-fit px-1 flex flex-col gap-1 items-start rounded mb-[27px] '>
               <div className='flex items-center'>
                 <CurrencyDollar size={20} className='text-gray-500' />
-                <h3 className='font-semibold text-base text-[#60A5FA] '>Imóveis com preços redondos podem atrair mais interessados</h3>
+                <h3 className='font-semibold text-base text-[#60A5FA] pl-1 '>Imóveis com preços redondos podem atrair mais interessados</h3>
               </div>
               
-              <p className='text-[#60A5FA] pl-[20px]'>Valores como R$505.000 diminuem suas chances de aparecer nas buscas dos clientes que usam limites 
+              <p className='text-[#60A5FA] pl-[24px] w-full'>Valores como R$505.000 diminuem suas chances de aparecer nas buscas dos clientes que usam limites 
                 redondos nos filtros do site, como R$500.000. </p>
             </div>
 

@@ -1,10 +1,44 @@
 import React from 'react';
 import Navbar from '../components/navBar'
 import AnuncioStepper from '../components/Stepper'
-import {Slider, Box} from '@material-ui/core'
+import {Slider} from '@material-ui/core'
 import anuncio from '../assets/anuncio.png'
+// import {useForm} from 'react-hook-form'
 
-function CreateAnuncio2(){
+const marks = [
+  {
+    value:0,
+    label:'1',
+  },
+  {
+    value:25,
+    label:'2',
+  },
+  {
+    value:50,
+    label:'3',
+  },
+  {
+    value:75,
+    label:'4',
+  },
+  {
+    value:100,
+    label:'5',
+  },
+]
+
+  function CreateAnuncio2(){
+    function valuetext(value) {
+      return `${value}`;
+    }
+  function valueLabelFormat(value) {
+    return marks.findIndex((mark) => mark.value === value) + 1;
+  }
+  // const { register, handleSubmit} = React.useForm()
+  // const onSubmit =(data)=>{
+  //   console.log(data)
+  // }
   return(
     
     <div className='h-screen'>
@@ -19,17 +53,32 @@ function CreateAnuncio2(){
           <div>
             <p>Insira a imagem do seu imóvel:</p>
             {/* Inserir uploader component */}
-            <div className='w-[544px] h-[157px] items-center'>Inserir component uploader</div>
+            {/* <div className='w-[544px] h-[157px] items-center'>Inserir component uploader</div> */}
+            {/* <form onSubmit={handleSubmit(onSubmit)}>
+              <input ref={register} type='file' name='picture' />
+              <button>Submit image</button>
+            </form> */}
+            {/* <FileUpload
+              multiFile={true}
+              onFilesChange={handleFilesChange}
+              onContextReady={(context) => {}}
+            /> */}
+            {/* <button onClick={uploadFiles}>Upload</button> */}
           </div>
           
             <label className='flex flex-col gap-2'>
               Descreva seu imóvel:
-              <textarea className='max-h-[544px]' rows={8} cols={24}/>
+              <textarea className='max-h-[544px] border border-gray-500' rows={8} cols={24}/>
             </label>
           
           
-          <p className='pb-[56px] pt-[26px]'>Quantidade de quartos:</p>
-          <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+          <p className='pb-[36px] pt-[26px]'>Quantidade de quartos:</p>
+          <Slider  aria-label='Restricted values' defaultValue={50}
+              marks={marks}
+              step={null}
+            valueLabelDisplay='auto'
+            valueLabelFormat={valueLabelFormat}
+            getAriaValueText={valuetext}/>
           <div className='py-[22px]'></div>
           <AnuncioStepper/>
         </div>

@@ -1,74 +1,156 @@
-// import React from 'react';
-// import Box from '@material-ui/core';
-// import Stepper from '@material-ui/core';
-// import Step from '@material-ui/core';
-// import StepLabel from '@material-ui/core';
-// import Button from '@material-ui/core';
-// import Typography from '@material-ui/core';
 
-import {Box, MobileStepper, Button, useTheme} from '@material-ui/core'
-// import {KeyboardArrowLeft} from '@material-ui/core';
-// import {KeyboardArrowRight} from '@material-ui/core/';
 
 import * as React from 'react'
+import {Box, Stepper, Step, StepLabel, Button, Typography, makeStyles} from '@material-ui/core';
 
 
+
+// const BackButtonEnabled = 'background: white color: #3B82F6 border: 1px solid #3B82F6 '
+// const BackButtonDisabled = 'background: #D1D5DB color: gray'
+
+const useStyles = makeStyles((theme) =>({
+  // root: {
+  //   width:'100%',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   background: 'black'
+  // },
+  buttonNext: {
+    background: '#3B82F6',
+    color: 'white',
+    width:'96px',
+    height: '54px',
+    '&:hover': {
+      background: '#3B82F6',
+    },
+    // buttonNext:hoover: 'none'
+  },
+    // marginLeft: theme.spacing(2)
+  // },
+  ButtonBackDisabled:{
+    background: '#D1D5DB',
+    color: 'gray'
+  },
+  buttonBackEnabled: {
+    background: 'white',
+    color: '#3B82F6',
+    border: '1px solid #3B82F6',
+    width:'96px',
+    height: '54px'
+    // marginRight: theme.spacing(2)
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    // paddingRight: theme.spacing(20),
+    // paddingLeft: theme.spacing(20),
+    padding: '0 155.5px',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // marginLeft: theme.spacing(2),
+    // paddingRight: theme.spacing(8),
+  },
+  Boxstyle:{
+    // justifyContent: 'center',
+    alignItems: 'center',
+    width: '544px',
+    display: 'flex',
+    
+  }
+}))
+
+const getSteps = () => [
+  {
+    label: '1',
+    description: </Anuncio2>
+  },
+  
+]
+function getStepContent(step) {
+  switch(step){
+    case 0:
+      return '1/3'
+    case 1:
+      return '2/3'
+    case 2: 
+      return '3/3'
+    default:
+      return 'Select default'
+  }
+}
 
 function AnuncioStepper() {
-  const steps = [1, 2, 3]
-  const theme = useTheme()
+  const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = steps.length;
+  const [skipped, setSkipped] = React.useState(new Set());
+  const steps = getSteps()
+
+  // const isSetOptional = (step) => {
+  //   return step === 1;
+  // }
+  const isStepSkipped = (step) => {
+    return skipped.has(step);
+  }
+  const handleNext = () => {
+    let newSkipped = skipped;
+    if(isStepSkipped(activeStep)){
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+    setActiveStep((preActiveStep) => preActiveStep + 1)
+    setSkipped(newSkipped);
+  };
+  const handleBack = () => {
+    setActiveStep((preActiveStep) => preActiveStep - 1)
+  }
+  
   
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
   
   return(
-    <div>
-        
-          <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-          
-          <Box sx={{ height: 70, maxWidth: 543, width: '100%', py: 8, alignItems: 'center', justifyContent: 'center' }}>
-            {steps[activeStep].description}
-          </Box>
-          <MobileStepper
-            variant="text"
-            steps={maxSteps}
-            position="static"
-            activeStep={activeStep}
-            nextButton={
-              <Button
-                size="small"
+    <div className='w-full items-center justify-center'>
+      <Stepper  activeStep={activeStep}>
+        <Box className={classes.Boxstyle}>
+          <Box>
+                <Button 
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={({isActive}) => 
+                    isActive 
+                      ? 'background: white, color: #3B82F6, border: 1px solid #3B82F6, width: 96px, height: 54px'
+                      : 'width: 96px height: 54px background: #D1D5DB color: gray'
+                    }
+                  >
+                    Back
+                </Button>
+            </Box>
+            <Box >
+              <Typography className={classes.instructions}>
+                {getStepContent(activeStep)}
+              </Typography>
+            </Box>
+            <Box>
+              <Button 
+                variant='contained'
+                disabled={activeStep === 2}
                 onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}
-                sx={{ bgcolor: 'background.b500', color:'text.paper'}}
-              >
-                Next
-                {/* {theme.direction === 'rtl' ? (
-                    <KeyboardArrowLeft />
-                  ) : (
-                    <KeyboardArrowRight />
-                  )} */}
-              </Button>
-            }
-            backButton={
-              <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                {/* {theme.direction === 'rtl' ? (
-                    <KeyboardArrowRight />
-                  ) : (
-                    <KeyboardArrowLeft />
-                  )} */}
-                Back
-              </Button>
-            }
-          />
+                className={classes.buttonNext}
+                >
+                  Next
+                </Button>
+            </Box>    
+
         </Box>
+        
+        
+      
+
+        
+        </Stepper>
+      
+      
+        
         
     </div>
   )
