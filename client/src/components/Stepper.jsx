@@ -1,7 +1,7 @@
 
 
 import * as React from 'react'
-import {Box, Stepper, Step, StepLabel, Button, Typography, makeStyles} from '@material-ui/core';
+import {Box, Stepper, Step, StepLabel, Button, Typography, makeStyles} from '@mui/material';
 
 
 
@@ -60,13 +60,11 @@ const useStyles = makeStyles((theme) =>({
   }
 }))
 
-const getSteps = () => [
-  {
-    label: '1',
-    description: </Anuncio2>
-  },
-  
-]
+// const steps = [
+//   {
+//     label: 
+//   }
+// ]
 function getStepContent(step) {
   switch(step){
     case 0:
