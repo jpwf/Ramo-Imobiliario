@@ -1,30 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import Navbar from './components/navBar';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import Routes from './routes/Routes'
+
+import { ToastContainer } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AuthProvider } from './contexts/AuthContext';
+import LoginPage from './pages/Login';
+
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Inter',
+      'Roboto',
+      'sans-serif'
+    ].join(','),
+  },
+  palette: {
+    primary: {
+      main: '#3b82f6',
+      dark: '#1d4ed8',
+      contrastText: '#fff',
+
+    }
+  }
+});
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className='text-5xl'>Teste</h1>
-      <div className="card">
-        <a
-          className='flex flex-row justify-center items-center rounded px-4 py-3 bg-blue-500 text-base text-white font-semibold
-            active:underline-offset-8'
-          onClick={() => setCount((count) => count + 1)}>
-          Cadastre-se {count}
-        </a>
-      </div>
-    </div>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+          <Router>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={3000}
+              limit={1}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            {/* <Navbar> */}
+              <Routes />
+            {/* </Navbar> */}
+          </Router>
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
 

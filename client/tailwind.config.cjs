@@ -4,11 +4,20 @@ module.exports = {
     "./index.hmtl",
     "./src/**/*.jsx"
   ],
+  
   theme: {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        login: "url('/login-img.png')" ,
+        register: "url('/register-img.png')",
+        home: "url('src/assets/home-img.png')"
+      }
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")({
+    strategy: 'class'
+  })],
 }
