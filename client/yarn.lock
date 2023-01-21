@@ -555,6 +555,11 @@
   "resolved" "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz"
   "version" "0.16.2"
 
+"@upload-io/upload-api-client-upload-js@^2.14.0":
+  "integrity" "sha512-mlEqPNhnZQh87EPuYAEPjeRtbg8LaaK2ronwDQomYmc9HGLU4pEBy20JJlIQ4wbfc9v5P7oskS87zRL3gIwVsg=="
+  "resolved" "https://registry.npmjs.org/@upload-io/upload-api-client-upload-js/-/upload-api-client-upload-js-2.14.0.tgz"
+  "version" "2.14.0"
+
 "@vitejs/plugin-react@^3.0.0":
   "integrity" "sha512-1mvyPc0xYW5G8CHQvJIJXLoMjl5Ct3q2g5Y2s6Ccfgwm45y48LBvsla7az+GkkAtYikWQ4Lxqcsq5RHLcZgtNQ=="
   "resolved" "https://registry.npmjs.org/@vitejs/plugin-react/-/plugin-react-3.0.0.tgz"
@@ -701,6 +706,11 @@
   optionalDependencies:
     "fsevents" "~2.3.2"
 
+"classnames@^2.2.6":
+  "integrity" "sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw=="
+  "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
+  "version" "2.3.2"
+
 "clsx@^1.1.1", "clsx@^1.2.1":
   "integrity" "sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg=="
   "resolved" "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz"
@@ -799,6 +809,11 @@
   dependencies:
     "@babel/runtime" "^7.8.7"
     "csstype" "^3.0.2"
+
+"dotenv@^16.0.3":
+  "integrity" "sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-16.0.3.tgz"
+  "version" "16.0.3"
 
 "electron-to-chromium@^1.4.251":
   "integrity" "sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA=="
@@ -1239,6 +1254,16 @@
     "picocolors" "^1.0.0"
     "source-map-js" "^1.0.2"
 
+"preact@^10.6.5":
+  "integrity" "sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg=="
+  "resolved" "https://registry.npmjs.org/preact/-/preact-10.11.3.tgz"
+  "version" "10.11.3"
+
+"progress-smoother@^1.4.0":
+  "integrity" "sha512-ctIG/KF/3DQ1zQHMWbXjcnicggTsEzZEA2JEnJNrPtK88tmqN9cfQf01yfLWGCBF93R5XN1EUe/z/IV5NKrmCw=="
+  "resolved" "https://registry.npmjs.org/progress-smoother/-/progress-smoother-1.4.0.tgz"
+  "version" "1.4.0"
+
 "prop-types@^15.6.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
@@ -1333,7 +1358,14 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^16.8.0 || ^17 || ^18", "react@^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
+"react-uploader@^3.3.0":
+  "integrity" "sha512-oi+AUWBE4+uRJlLCOTQ7RZijY6HhajbdAxWq6FG1RqMeEiNelXgrVqPtpsZquaMBg+yIBMq2B6H3Yi9oW8u1Xw=="
+  "resolved" "https://registry.npmjs.org/react-uploader/-/react-uploader-3.3.0.tgz"
+  "version" "3.3.0"
+  dependencies:
+    "uploader" "^3.3.0"
+
+"react@^16.8.0 || ^17 || ^18", "react@^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -1484,6 +1516,23 @@
   dependencies:
     "escalade" "^3.1.1"
     "picocolors" "^1.0.0"
+
+"upload-js@^2.8.0":
+  "integrity" "sha512-an/f11ilO8W4XKkhapywE9uBIV75TZefdHYF6k0P9gCCu2KB8z9pRO64I4JpNfR0wJmTx1wb1uynK8NEHo6+Fg=="
+  "resolved" "https://registry.npmjs.org/upload-js/-/upload-js-2.8.0.tgz"
+  "version" "2.8.0"
+  dependencies:
+    "@upload-io/upload-api-client-upload-js" "^2.14.0"
+    "progress-smoother" "^1.4.0"
+
+"uploader@^3.3.0":
+  "integrity" "sha512-Px1AMX8FKPB2aBdBejZQEUksn9djaG69skjl0ue0VkuF+R9/pLQ8ltFKhIMTphY6MmmIi03jezNIsxW9P2h8/Q=="
+  "resolved" "https://registry.npmjs.org/uploader/-/uploader-3.3.0.tgz"
+  "version" "3.3.0"
+  dependencies:
+    "classnames" "^2.2.6"
+    "preact" "^10.6.5"
+    "upload-js" "^2.8.0"
 
 "util-deprecate@^1.0.2":
   "integrity" "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="

@@ -3,9 +3,6 @@ import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-import notificacao from '../utils/notificacao';
 import { Eye, EyeSlash } from 'phosphor-react';
 import { RegisterService } from '../services/api/register/RegisterService';
 import Navbar from '../components/navBar';
@@ -43,7 +40,6 @@ function Register() {
         try {
             //remove confirmPassword from data
             const { confirmPassword, ...user } = data;
-            console.log(user);
             const response = await RegisterService.register(user);
             //if response is true, navigate to login page
             if (response) {

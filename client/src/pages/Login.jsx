@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
@@ -8,7 +8,6 @@ import { useAuthContext } from '../contexts/AuthContext';
 import LoginImage from '../assets/login-img.png'
 
 import { EnvelopeSimple, Password, EyeSlash, Eye } from 'phosphor-react'
-import notificacao from '../utils/notificacao';
 import Navbar from '../components/navBar';
 
 function LoginPage() {
@@ -33,19 +32,28 @@ function LoginPage() {
 
   const submitForm = async (data) => {
     try {
-      await login(data.email, data.password)
-      //Using react router dom navigate to previous page or home if there is no previous page or the previous page is the register page
-      if (navigate.length >= 2 && navigate.arguments !== '/cadastro') {
-        navigate(-1, { replace: true })
+      await login(data.email, data.password);
+      const previous = previousPage();
+      if (previous === '/login' || previous === '/cadastro') {
+        navigate('/', { replace: true });
       } else {
-        navigate('/', { replace: true })
+        navigate(previous, { replace: true });
       }
     } catch (error) {
+      console.log('teste')
       console.log(error.message)
-    } finally {
-      reset();
     }
   }
+
+  const previousPage = () => {
+    const previousPage = localStorage.getItem('previousPage') || '/';
+    localStorage.removeItem('previousPage');
+    return previousPage;
+  }
+
+  useEffect(() => {
+    localStorage.setItem('previousPage', window.location.pathname);
+  }, []);
 
   return (
 
