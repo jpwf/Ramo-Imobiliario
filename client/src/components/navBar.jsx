@@ -91,7 +91,7 @@ function Navbar() {
               <p className="py-5 px-3 text-gray-700 hover:text-gray-900"> Buscar imóveis </p>
             </NavLink>
             <NavLink
-              to={"/criar-anuncio"}
+              to={"/criar-anuncio/2"}
               className={({ isActive }) =>
                 isActive
                   ? activeStyle
@@ -170,7 +170,7 @@ function Navbar() {
         <div className={`border flex-col justify-self-center md:hidden ${navbar ? "flex" : "hidden"}`}>
           <Link to={"/"} className="block py-4 px-2 text-sm text-gray-700 hover:bg-gray-200"> Início </Link>
           <Link to={"/apartment"} className="py-4 px-2 text-sm text-gray-700 hover:bg-gray-200"> Buscar imóveis</Link>
-          <Link to={"/criar-anuncio"} className="py-4 px-2 text-sm text-gray-700 hover:bg-gray-200"> Anunciar </Link>
+          <Link to={"/criar-anuncio/2"} className="py-4 px-2 text-sm text-gray-700 hover:bg-gray-200"> Anunciar </Link>
 
           {isAuthenticated ?
             <Link to={"/"} aria-label='avatar' onClick={() => { logout() }} className=' flex items-center py-4 px-2 gap-1 text-sm text-gray-700 hover:bg-gray-200'>

@@ -26,11 +26,15 @@ const getAll = async (props) => {
 };
 
 
-const create = async () => {
+const create = async (newApartment) => {
     try {
+        const {data} = await get(createUrl('/apartment/publish'), newApartment);
+        if (data) {
+            return data;
+        }
         
     } catch (error) {
-        
+        return new Error(error.message || 'Erro ao criar o registro.');
     }
 };
 
